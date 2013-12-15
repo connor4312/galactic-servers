@@ -7,56 +7,61 @@
 	
 	<link href="css/style.css" media="all" rel="stylesheet" type="text/css" />
 	<link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.min.css" media="all" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="//use.typekit.net/ddx3cat.js"></script>
+	<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 </head>
 <body>
 	<nav class="main navbar navbar-default"> 
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#js-navcollapse">
-				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="#">Galactic Servers</a>
-		</div>
-		<div class="collapse navbar-collapse" id="js-navcollapse">
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#">Home</a></li>
-				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Pricing <b class="caret"></b></a>
-					<ul class="dropdown-menu">
-						<li><a href="#">Minecraft Hosting</a></li>
-						<li><a href="#">Dedicated Servers</a></li>
-						<li><a href="#">Web Hosting</a></li>
-						<li><a href="#">Web Design</a></li>
-					</ul>
-				</li>
-				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown">About <b class="caret"></b></a>
-					<ul class="dropdown-menu">
-						<li><a href="#">Why Galactic?</a></li>
-						<li><a href="#">Our Team</a></li>
-						<li><a href="#">Affiliation</a></li>
-						<li><a href="#">Partners</a></li>
-						<li><a href="#">FAQ</a></li>
-						<li><a href="#">Testimonies</a></li>
-					</ul>
-				</li>
-				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Panel <b class="caret"></b></a>
-					<ul class="dropdown-menu">
-						<li><a href="#">Multicraft</a></li>
-						<li><a href="#">cPanel</a></li>
-						<li><a href="#">Client Area</a></li>
-					</ul>
-				</li>
-			</ul>
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#js-navcollapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Galactic Servers</a>
+			</div>
+			<div class="collapse navbar-collapse" id="js-navcollapse">
+				<div class="navbar-form navbar-right"><a class="btn btn-primary">Buy Now</a></div>
+				<ul class="nav navbar-nav navbar-right">
+					<li class="active"><a href="#">Home</a></li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Pricing <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="#">Minecraft Hosting</a></li>
+							<li><a href="#">Dedicated Servers</a></li>
+							<li><a href="#">Web Hosting</a></li>
+							<li><a href="#">Web Design</a></li>
+						</ul>
+					</li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">About <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="#">Why Galactic?</a></li>
+							<li><a href="#">Our Team</a></li>
+							<li><a href="#">Affiliation</a></li>
+							<li><a href="#">Partners</a></li>
+							<li><a href="#">FAQ</a></li>
+							<li><a href="#">Testimonies</a></li>
+						</ul>
+					</li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Panel <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="#">Multicraft</a></li>
+							<li><a href="#">cPanel</a></li>
+							<li><a href="#">Client Area</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
 		</div>
 	</nav>
 	<div id="slider">
 		<div class="ticker">
 			<h2>Boldly going where no host has gone before</h2>
-			<h2>Dedicated servers from $29.99</h2>
+			<h2>Dedicated servers from just $29.99</h2>
 			<h2>The best Minecraft hosting in the galaxy</h2>
 		</div>
 		<a class="btn-to-action">Learn More</a>
@@ -71,18 +76,18 @@
 		</div>
 	</div>
 	<div class="container">
-		<div id="featureboxes">
-			<div class="col-md-4">
+		<div class="row">
+			<div class="col-md-4 featbox">
 				<i class="fa fa-thumbs-o-up"></i>
 				<h3>Secure &amp; Reliable</h3>
 				<p>Here at PPX Hosting, we offer backups of your work so if you manage to loose or delete it we have you covered!</p>
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-4 featbox">
 				<i class="fa fa-rocket"></i>
 				<h3>Quick &amp; Super Fast</h3>
 				<p>Our servers are setup almost instantly, meaning you can play/use your service instantly wasting no time!</p>
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-4 featbox">
 				<i class="fa fa-comments"></i>
 				<h3>Great Support</h3>
 				<p>We offer Live Chat to all our customers and we also use tickets via WHMCS, so their is always a helping hand waiting for you.</p>
@@ -90,9 +95,15 @@
 		</div>
 		<h1>Get Started</h1>
 		<div class="row">
-			<a class="btn-start col-md-4">Minecraft Hosting</a>
-			<a class="btn-start col-md-4">Dedicated Servers</a>
-			<a class="btn-start col-md-4">Web Services</a>
+			<div class="col-md-4">
+				<a class="btn-start">Minecraft Hosting</a>
+			</div>
+			<div class="col-md-4">
+				<a class="btn-start">Dedicated Servers</a>
+			</div>
+			<div class="col-md-4">
+				<a class="btn-start lc">Web Services</a>
+			</div>
 		</div>
 		<h1>Connect</h1>
 		<div class="col-md-6">
@@ -113,12 +124,15 @@
 		</div>
 	</div>
 	<footer>
-		<div class="col-md-4"><a>Terms of Service</a></div>
-		<div class="col-md-4">Copyright 2013 by GalacticServers</div>
-		<div class="col-md-4"><a href="http://pyxld.com">Designed</a></div>
+		<div class="container">
+			<div class="col-md-4"><a>Terms of Service</a></div>
+			<div class="col-md-4 text-center">Copyright 2013 by GalacticServers</div>
+			<div class="col-md-4 text-right"><a href="http://pyxld.com">Designed</a></div>
+		</div>
 	</footer>
-	<script type="text/javascript" src="//use.typekit.net/ddx3cat.js"></script>
-	<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/app.js"></script>
 </body>
 </html>

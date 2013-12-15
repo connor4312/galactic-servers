@@ -1,12 +1,15 @@
 @import "../../bower_components/bootstrap/less/variables.less";
 
+@body-bg: #f6f6f6;
 @font-family-sans-serif: "proxima-nova", sans-serif;
 @brand-primary: #00ccff;
 
-@navbar-default-color: #161616;
-@navbar-default-bg: @brand-primary;
-@navbar-default-border: none;
+@navbar-height: 65px;
+@navbar-border-radius: 0;
 
+@navbar-default-color: #666;
+@navbar-default-bg: #161616;
+@navbar-default-border: none;
 @navbar-default-link-color: #666;
 @navbar-default-link-hover-color: #999;
 @navbar-default-link-active-color: @navbar-default-link-hover-color;
@@ -23,11 +26,234 @@
 @import "../../bower_components/bootstrap/less/grid.less";
 @import "../../bower_components/bootstrap/less/forms.less";
 
+@import "../../bower_components/bootstrap/less/dropdowns.less";
 @import "../../bower_components/bootstrap/less/navs.less";
 @import "../../bower_components/bootstrap/less/navbar.less";
+
+@import "../../bower_components/bootstrap/less/buttons.less";
 
 // Utility classes
 @import "../../bower_components/bootstrap/less/utilities.less";
 @import "../../bower_components/bootstrap/less/responsive-utilities.less";
 
 @import "util/toolbox.less";
+
+a {
+	cursor: pointer;
+}
+h1 {
+	text-transform: uppercase;
+	text-align: center;
+	font-weight: 300;
+	color: #333;
+	margin: 50px 0;
+}
+
+.main.navbar {
+
+	.nav > li > a {
+		text-transform: uppercase;
+		letter-spacing: 1px;
+		text-shadow: 0 1px 2px #000;
+	}
+	.btn {
+		margin-left: 10px;
+	}
+
+	.navbar-brand {
+		text-indent: -9999px;
+		background: url('../img/logo.png') center center no-repeat;
+		min-width: 220px;
+		opacity: 0.7;
+		
+		&:hover {
+			opacity: 1;
+			.transition(0.5s);
+		}
+	}
+}
+#slider {
+	background: #000 url('../img/slide1.jpg') center top no-repeat;
+	height: 425px;
+	margin: -20px 0 20px;
+	text-align: center;
+	color: #fff;
+	text-transform: uppercase;
+	padding: 1px 0;
+
+	h2 {
+		font-weight: 200;
+		font-size: 32px;
+		text-shadow: 0 1px 2px #000;
+		height: 96px;
+		.transition(0.3s);
+		width: 475px;
+		margin: 0 auto;
+	}
+
+	.ticker {
+		height: 96px;
+		overflow: hidden;
+		margin-top: 100px;
+	}
+}
+
+.btn-to-action {
+	display: inline-block;
+	padding: 8px 40px;
+	margin: 15px 0;
+	border: 1px solid #0cf;
+	border-radius: 4px;
+}
+
+#iconbar {
+	margin: -20px 0 20px;
+	background: #fff;
+	border-bottom: 1px solid #e8e8e8;
+
+	.icon {
+		height: 100px;
+		display: inline-block;
+		background-position: center center;
+		background-repeat: no-repeat;
+		position: relative;
+		
+		&:last-child::after {
+			display: none;
+		}
+
+		&::after {
+			content: "\00a0";
+			display: block;
+			position: absolute;
+			top: 0px;
+			right: 0px;
+			width: 1px;
+			height: 100%;
+			#gradient.vertical(#dedede, #fff);
+		}
+	}
+}
+
+.featbox {
+
+	text-align: center;
+
+	p {
+		font-size: 1.2em;
+		color: #666;
+	}
+	h3 {
+		text-transform: uppercase;
+		font-size: 1.5em;
+		font-weight: 300;
+		margin: 0;
+	}
+	i {
+		font-size: 3em;
+		border-bottom: 1px solid #ccc;
+		width: 100%;
+		display: block;
+		height: 0.75em;
+		margin-bottom: 1.25em;
+
+
+		&:hover:before {
+			background: @brand-primary;
+			color: #fff;
+			border-color: #fff;
+			.rotate(360deg);
+			.transition(0.3s);
+		}
+
+		&:before {
+			border: 1px solid #ccc;
+			width: 1.5em;
+			display: inline-block;
+			line-height: 1.5em;
+			border-radius: 50%;
+			color: #999;
+			z-index: 10;
+			background: #fff;
+			text-align: center;
+		}
+	}
+}
+.btn-start {
+	padding: 20px;
+	text-align: center;
+	background: #333;
+	font-size: 1.5em;
+	margin: 10px;
+	text-transform: uppercase;
+	font-weight: 300;
+	color: #777;
+	display: block;
+	position: relative;
+	.transition(0.1s);
+
+	&:hover {
+		background: @brand-primary;
+		color: #fff;
+		text-decoration: none;
+		.transition(0.4s);
+	}
+
+	&::after {
+		content: "\00a0";
+		display: block;
+		position: absolute;
+		top: 50%;
+		right: -50px;
+		width: 50px;
+		height: 1px;
+		border-bottom: 1px solid @brand-primary;
+	}
+
+	&.lc::after {
+		display: none;
+	}
+}
+
+.mission {
+
+	background: #fff;
+	padding: 20px;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+	position: relative;
+
+	a {
+		position: absolute;
+		bottom: -35px;
+		right: 15px;
+		color: #666;
+
+		span {
+			font-size: 0.75em;
+			margin-right: 3px;
+		}
+	}
+
+	p {
+		margin: 0;
+		font-size: 1.2em;
+		line-height: 1.6em;
+		color: #999;
+
+		span {
+			color: #000;
+		}
+	}
+}
+
+footer {
+	background: #161616;
+	text-transform: uppercase;
+	color: #666;
+	padding: 30px 0;
+	margin-top: 30px;
+
+	a {
+		color: #333;
+	}
+}
