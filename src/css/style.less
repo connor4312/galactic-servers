@@ -28,6 +28,8 @@
 @navbar-inverse-link-disabled-color: #ccc;
 @navbar-inverse-link-disabled-bg: transparent;
 
+@breadcrumb-bg: #fff;
+
 @import "../../bower_components/bootstrap/less/mixins.less";
 
 // Reset
@@ -42,6 +44,7 @@
 @import "../../bower_components/bootstrap/less/dropdowns.less";
 @import "../../bower_components/bootstrap/less/navs.less";
 @import "../../bower_components/bootstrap/less/navbar.less";
+@import "../../bower_components/bootstrap/less/breadcrumbs.less";
 
 @import "../../bower_components/bootstrap/less/buttons.less";
 
@@ -50,6 +53,22 @@
 @import "../../bower_components/bootstrap/less/responsive-utilities.less";
 
 @import "util/toolbox.less";
+
+html, body {
+	height: 100%;
+}
+.page-wrap {
+	min-height: 100%;
+	margin-bottom: -130px; 
+
+	&:after {
+		content: "";
+		display: block;
+	}
+}
+footer, .page-wrap:after {
+	height: 100px;
+}
 
 a {
 	cursor: pointer;
