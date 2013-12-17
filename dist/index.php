@@ -63,7 +63,7 @@ $app->get('/.*?', function () use ($app) {
 	$path = $app->request->getResourceUri();
 
 	// Make sure the user isn't trying to escape and do nasty things
-	if (!preg_match('/^[A-z\/]+$/', $path)) {
+	if (!preg_match('/^[A-z\/\-\_]+$/', $path)) {
 		echo loadPage('404');
 	}
 
