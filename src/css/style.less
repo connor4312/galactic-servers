@@ -15,6 +15,19 @@
 @navbar-default-link-active-color: @navbar-default-link-hover-color;
 @navbar-default-link-active-bg: transparent;
 
+@navbar-inverse-color: @gray-light;
+@navbar-inverse-bg: #fff;
+@navbar-inverse-border: none;
+
+// Inverted navbar link
+@navbar-inverse-link-color: #999;
+@navbar-inverse-link-hover-color: #666;
+@navbar-inverse-link-hover-bg: #eee;
+@navbar-inverse-link-active-color: @navbar-inverse-link-hover-color;
+@navbar-inverse-link-active-bg: @navbar-inverse-link-hover-bg;
+@navbar-inverse-link-disabled-color: #ccc;
+@navbar-inverse-link-disabled-bg: transparent;
+
 @import "../../bower_components/bootstrap/less/mixins.less";
 
 // Reset
@@ -74,12 +87,18 @@ h1 {
 }
 #slider {
 	background: #000 url('../img/slide1.jpg') center top no-repeat;
-	height: 425px;
 	margin: -20px 0 20px;
 	text-align: center;
 	color: #fff;
 	text-transform: uppercase;
 	padding: 1px 0;
+
+	h1 {
+		color: #fff;
+		text-align: left;
+		font-size: 3em;
+		font-weight: 200;
+	}
 
 	h2 {
 		font-weight: 200;
@@ -104,12 +123,17 @@ h1 {
 	margin: 15px 0;
 	border: 1px solid #0cf;
 	border-radius: 4px;
+	margin-bottom: 100px;
 }
 
 #iconbar {
 	margin: -20px 0 20px;
 	background: #fff;
 	border-bottom: 1px solid #e8e8e8;
+
+	.navbar {
+		margin: 0;
+	}
 
 	.icon {
 		height: 100px;
