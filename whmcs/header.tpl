@@ -9,7 +9,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-	<link href="replaceme" media="all" rel="stylesheet" type="text/css" />
+	<link href="//galacticservers.com/css/style.css" media="all" rel="stylesheet" type="text/css" />
 	<link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.min.css" media="all" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="//use.typekit.net/ddx3cat.js"></script>
 	<script type="text/javascript">Typekit.load();</script>
@@ -35,33 +35,32 @@
 			<div class="collapse navbar-collapse" id="js-navcollapse">
 				<div class="navbar-form navbar-right"><a class="btn btn-primary">Buy Now</a></div>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#">Home</a></li>
+					<li><a href="//galacticservers.com">Home</a></li>
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Pricing <b class="caret"></b></a>
 						<ul class="dropdown-menu">
-							<li><a href="#">Minecraft Hosting</a></li>
-							<li><a href="#">Dedicated Servers</a></li>
-							<li><a href="#">Web Hosting</a></li>
+							<li><a href="//my.galacticservers.com/cart.php?gid=1">Minecraft Hosting</a></li>
+							<li><a href="//my.galacticservers.com/cart.php?gid=4">Dedicated Servers</a></li>
+							<li><a href="//my.galacticservers.com/cart.php?gid=2">Web Hosting</a></li>
 							<li><a href="#">Web Design</a></li>
 						</ul>
 					</li>
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">About <b class="caret"></b></a>
 						<ul class="dropdown-menu">
-							<li><a href="#">Why Galactic?</a></li>
-							<li><a href="#">Our Team</a></li>
-							<li><a href="#">Affiliation</a></li>
-							<li><a href="#">Partners</a></li>
-							<li><a href="#">FAQ</a></li>
-							<li><a href="#">Testimonies</a></li>
+							<li><a href="//galacticservers.com/why-galactic">Why Galactic?</a></li>
+							<li><a href="//galacticservers.com/our-team">Our Team</a></li>
+							<li><a href="//galacticservers.com/affiliation">Affiliation</a></li>
+							<li><a href="//galacticservers.com/faq">FAQ</a></li>
+							<li><a href="//galacticservers.com/testimonies">Testimonies</a></li>
 						</ul>
 					</li>
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Panel <b class="caret"></b></a>
 						<ul class="dropdown-menu">
-							<li><a href="#">Multicraft</a></li>
-							<li><a href="#">cPanel</a></li>
-							<li><a href="#">Client Area</a></li>
+							<li><a href="//mc.galacticservers.com/">Multicraft</a></li>
+							<li><a href="//cpanel.galacticservers.com/">cPanel</a></li>
+							<li><a href="//my.galacticservers.com/">Client Area</a></li>
 						</ul>
 					</li>
 				</ul>
