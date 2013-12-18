@@ -59,7 +59,7 @@ html, body {
 }
 .page-wrap {
 	min-height: 100%;
-	margin-bottom: -130px; 
+	margin-bottom: -100px; 
 
 	&:after {
 		content: "";
@@ -239,7 +239,13 @@ h1 {
 		background: @brand-primary;
 		color: #fff;
 		text-decoration: none;
-		.transition(0.4s);
+		.transition(0.5s);
+
+		p {
+			max-height: 100px;
+			padding: 20px 20px;
+			.transition(0.5s);
+		}
 	}
 
 	&::after {
@@ -251,6 +257,18 @@ h1 {
 		width: 50px;
 		height: 1px;
 		border-bottom: 1px solid @brand-primary;
+	}
+
+	p {
+		background: #fff;
+		padding: 0px 20px;
+		margin: 0 -20px;
+		font-size: 0.8em;
+		text-transform: none;
+		overflow: hidden;
+		max-height: 0px;
+		color: #777;
+		.transition(0.1s);
 	}
 
 	&.lc::after {

