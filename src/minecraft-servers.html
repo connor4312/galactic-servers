@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+	{{> head }}
+	<title>Minecraft Servers</title>
+</head>
+<body>
+	<div class="page-wrap">
+		{{> navigation }}
+		<div id="slider">
+			<div class="container">
+				<h1>Why Galactic?</h1>
+			</div>
+		</div>
+		<div class="container">
+			{{#plans}}
+				<div class="col-md-3">
+					<a class="plan">
+						<div class="thumb" style="background-image:url('img/plan/{{name}}.jpg')">
+							{{name}}
+						</div>
+						<span>{{size}}</span>
+						<b>${{price}}</b>
+					</a>
+				</div>
+			{{/plans}}
+		</div>
+	</div>
+	{{> footer }}
+</body>
+</html>
