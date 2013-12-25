@@ -1,38 +1,32 @@
 {if $affiliatesystemenabled}
+<div class="page-header">
+	<h1>{$LANG.affiliatesactivate}</h1>
+</div>
 
-{include file="$template/pageheader.tpl" title=$LANG.affiliatesactivate}
-
-<div class="alert alert-block alert-info">
-
-    <h2>{$LANG.affiliatesignuptitle}</h2>
-
-    <p>{$LANG.affiliatesignupintro}</p>
-
+<div class="alert alert-info">
+	<h4 class="alert-heading">{$LANG.affiliatesignuptitle}</h4>
+	{$LANG.affiliatesignupintro}
 </div>
 
 <ul>
-<li>{$LANG.affiliatesignupinfo1}</li>
-<li>{$LANG.affiliatesignupinfo2}</li>
-<li>{$LANG.affiliatesignupinfo3}</li>
+	<li>{$LANG.affiliatesignupinfo1}</li>
+	<li>{$LANG.affiliatesignupinfo2}</li>
+	<li>{$LANG.affiliatesignupinfo3}</li>
 </ul>
 
-<br />
-
-<form method="post" action="affiliates.php">
-<input type="hidden" name="activate" value="true" />
-<p align="center"><input type="submit" value="{$LANG.affiliatesactivate}" class="btn btn-success" /></p>
+<form method="post" action="affiliates.php" class="text-center">
+	<input type="hidden" name="activate" value="true">
+	<button class="btn btn-success btn-lg">{$LANG.affiliatesactivate}</button>
 </form>
 
 {else}
 
-{include file="$template/pageheader.tpl" title=$LANG.affiliatestitle}
+<div class="page-header">
+	<h1>{$LANG.affiliatestitle}</h1>
+</div>
 
 <div class="alert alert-warning">
-    <p>{$LANG.affiliatesdisabled}</p>
+	{$LANG.affiliatesdisabled}
 </div>
 
 {/if}
-
-<br />
-<br />
-<br />

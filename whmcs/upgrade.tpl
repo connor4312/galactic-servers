@@ -1,16 +1,20 @@
-{include file="$template/pageheader.tpl" title=$LANG.upgradedowngradepackage}
+<div class="page-header">
+	<h1>{$LANG.upgradedowngradepackage}</h1>
+</div>
 
-<div class="alert alert-block alert-info">
-    <p>{$LANG.orderproduct}: <strong>{$groupname} - {$productname}</strong>{if $domain} ({$domain}){/if}</p>
+<div class="alert alert-info">
+	<span class="lead">{$LANG.orderproduct}: <strong>{if $groupname}{$groupname} - {/if}{$productname}</strong>{if $domain} ({$domain}){/if}</span>
 </div>
 
 {if $overdueinvoice}
 
-<p>{$LANG.upgradeerroroverdueinvoice}</p>
+<div class="alert alert-danger">
+	{$LANG.upgradeerroroverdueinvoice}
+</div>
 
-<br />
-
-<p><input type="button" value="{$LANG.clientareabacklink}" onclick="window.location='clientarea.php?action=productdetails&id={$id}'" class="btn btn-large" /></p>
+<p class="text-center">
+	<a href="clientarea.php?action=productdetails&id={$id}" class="btn btn-primary">{$LANG.clientareabacklink}</a>
+</p>
 
 {else}
 
@@ -18,115 +22,117 @@
 
 <p>{$LANG.upgradechoosepackage}</p>
 
-<br />
-
-<div class="center80">
-<table class="table table-striped table-framed">
-{foreach key=num item=upgradepackage from=$upgradepackages}
-<tr>
-<td>
-<form method="post" action="{$smarty.server.PHP_SELF}">
-<input type="hidden" name="step" value="2">
-<input type="hidden" name="type" value="{$type}">
-<input type="hidden" name="id" value="{$id}">
-<input type="hidden" name="pid" value="{$upgradepackage.pid}">
-<strong>{$upgradepackage.groupname} - {$upgradepackage.name}</strong>
-</td>
-<td class="text-center">
-{if $upgradepackage.pricing.type eq "free"}
-{$LANG.orderfree}<br />
-<input type="hidden" name="billingcycle" value="free">
-{elseif $upgradepackage.pricing.type eq "onetime"}
-{$upgradepackage.pricing.onetime} {$LANG.orderpaymenttermonetime}
-<input type="hidden" name="billingcycle" value="onetime">
-{elseif $upgradepackage.pricing.type eq "recurring"}
-<select name="billingcycle">
-{if $upgradepackage.pricing.monthly}<option value="monthly">{$upgradepackage.pricing.monthly}</option>{/if}
-{if $upgradepackage.pricing.quarterly}<option value="quarterly">{$upgradepackage.pricing.quarterly}</option>{/if}
-{if $upgradepackage.pricing.semiannually}<option value="semiannually">{$upgradepackage.pricing.semiannually}</option>{/if}
-{if $upgradepackage.pricing.annually}<option value="annually">{$upgradepackage.pricing.annually}</option>{/if}
-{if $upgradepackage.pricing.biennially}<option value="biennially">{$upgradepackage.pricing.biennially}</option>{/if}
-{if $upgradepackage.pricing.triennially}<option value="triennially">{$upgradepackage.pricing.triennially}</option>{/if}
-</select>
-{/if}
-</td>
-<td class="text-center"><input type="submit" value="{$LANG.upgradedowngradechooseproduct}" class="btn" /></form></td>
-</tr>
+<div class="list-group">
+	{foreach key=num item=upgradepackage from=$upgradepackages}
+	<form method="post" action="upgrade.php" class="list-group-item">
+		<input type="hidden" name="step" value="2">
+		<input type="hidden" name="type" value="{$type}">
+		<input type="hidden" name="id" value="{$id}">
+		<input type="hidden" name="pid" value="{$upgradepackage.pid}">
+		<div class="row">
+			<div class="col-md-6">
+				<h4>{if $upgradepackage.groupname}{$upgradepackage.groupname} - {/if}{$upgradepackage.name}</h4>
+			</div>
+			<div class="col-md-4">
+				{if $upgradepackage.pricing.type eq "free"}
+				{$LANG.orderfree}
+				<input type="hidden" name="billingcycle" value="free" class="form-control">
+				{elseif $upgradepackage.pricing.type eq "onetime"}
+				{$upgradepackage.pricing.onetime} {$LANG.orderpaymenttermonetime}
+				<input type="hidden" name="billingcycle" value="onetime" class="form-control">
+				{elseif $upgradepackage.pricing.type eq "recurring"}
+				<select name="billingcycle" class="form-control">
+					{if $upgradepackage.pricing.monthly}<option value="monthly">{$upgradepackage.pricing.monthly}</option>{/if}
+					{if $upgradepackage.pricing.quarterly}<option value="quarterly">{$upgradepackage.pricing.quarterly}</option>{/if}
+					{if $upgradepackage.pricing.semiannually}<option value="semiannually">{$upgradepackage.pricing.semiannually}</option>{/if}
+					{if $upgradepackage.pricing.annually}<option value="annually">{$upgradepackage.pricing.annually}</option>{/if}
+					{if $upgradepackage.pricing.biennially}<option value="biennially">{$upgradepackage.pricing.biennially}</option>{/if}
+					{if $upgradepackage.pricing.triennially}<option value="triennially">{$upgradepackage.pricing.triennially}</option>{/if}
+				</select>
+				{/if}
+			</div>
+			<div class="col-md-2 text-right">
+				<input type="submit" value="{$LANG.upgradedowngradechooseproduct}" class="btn btn-primary">
+			</div>
+		</div>
+	</form>
 {/foreach}
-</table>
 </div>
 
 {elseif $type eq "configoptions"}
 
-<p>{$LANG.upgradechooseconfigoptions}</p>
-
-<br />
-
 {if $errormessage}
 <div class="alert alert-danger">
-    <p class="bold">{$LANG.clientareaerrors}</p>
-    <ul>
-        {$errormessage}
-    </ul>
+	<h4 class="alert-heading">{$LANG.clientareaerrors}</h4>
+	<ul>
+		{$errormessage}
+	</ul>
 </div>
 {/if}
 
-<form method="post" action="{$smarty.server.PHP_SELF}">
-<input type="hidden" name="step" value="2" />
-<input type="hidden" name="type" value="{$type}" />
-<input type="hidden" name="id" value="{$id}" />
+<p>{$LANG.upgradechooseconfigoptions}</p>
 
-<div class="center80">
-<table class="table table-striped table-framed">
-    <thead>
-        <tr>
-            <th></th>
-            <th class="text-center">{$LANG.upgradecurrentconfig}</th>
-            <th></th>
-            <th class="text-center">{$LANG.upgradenewconfig}</th>
-        </tr>
-    </thead>
-    <tbody>
-{foreach key=num item=configoption from=$configoptions}
-        <tr>
-            <td>{$configoption.optionname}</td>
-            <td class="text-center">
-{if $configoption.optiontype eq 1 || $configoption.optiontype eq 2}
-{$configoption.selectedname}
-{elseif $configoption.optiontype eq 3}
-{if $configoption.selectedqty}{$LANG.yes}{else}{$LANG.no}{/if}
-{elseif $configoption.optiontype eq 4}
-{$configoption.selectedqty} x {$configoption.options.0.name}
-{/if}
-            </td>
-            <td class="text-center">=></td>
-            <td class="text-center">
-{if $configoption.optiontype eq 1 || $configoption.optiontype eq 2}
-<select name="configoption[{$configoption.id}]">
-{foreach key=num item=option from=$configoption.options}
-{if $option.selected}<option value="{$option.id}" selected>{$LANG.upgradenochange}</option>{else}<option value="{$option.id}">{$option.nameonly} {$option.price}{/if}</option>
-{/foreach}
-</select>
-{elseif $configoption.optiontype eq 3}
-<input type="checkbox" name="configoption[{$configoption.id}]" value="1"{if $configoption.selectedqty} checked{/if}> {$configoption.options.0.name}
-{elseif $configoption.optiontype eq 4}
-<input type="text" name="configoption[{$configoption.id}]" value="{$configoption.selectedqty}" size="5"> x {$configoption.options.0.name}
-{/if}
-            </td>
-        </tr>
-{/foreach}
-    </tbody>
-</table>
-</div>
+<form method="post" action="upgrade.php">
+	<input type="hidden" name="step" value="2">
+	<input type="hidden" name="type" value="{$type}">
+	<input type="hidden" name="id" value="{$id}">
+	<div class="row">
+		<div class="col-md-3 col-md-offset-6">
+			<strong>{$LANG.upgradecurrentconfig}</strong>
+		</div>
+		<div class="col-md-3">
+			<strong>{$LANG.upgradenewconfig}</strong>
+		</div>
+	</div>
+	<hr>
+	{foreach key=num item=configoption from=$configoptions}
+	<div class="row">
+		<div class="col-md-6">
+			{$configoption.optionname}
+		</div>
+		<div class="col-md-3">
+			{if $configoption.optiontype eq 1 || $configoption.optiontype eq 2}
+			{$configoption.selectedname}
+			{elseif $configoption.optiontype eq 3}
+			{if $configoption.selectedqty}{$LANG.yes}{else}{$LANG.no}{/if}
+			{elseif $configoption.optiontype eq 4}
+			{$configoption.selectedqty} &times; {$configoption.options.0.name}
+			{/if}
+		</div>
+		<div class="col-md-3">
+			{if $configoption.optiontype eq 1 || $configoption.optiontype eq 2}
+			<select name="configoption[{$configoption.id}]" class="form-control">
+				{foreach key=num item=option from=$configoption.options}
+				{if $option.selected}
+				<option value="{$option.id}" selected="checked">{$LANG.upgradenochange}</option>
+				{else}
+				<option value="{$option.id}">{$option.nameonly} {$option.price}</option>
+				{/if}
+				{/foreach}
+			</select>
+			{elseif $configoption.optiontype eq 3}
+			<div class="checkbox">
+				<label>
+					<input type="checkbox" name="configoption[{$configoption.id}]" value="1"{if $configoption.selectedqty} checked="checked"{/if}> 
+					{$configoption.options.0.name}
+				</label>
+			</div>
+			{elseif $configoption.optiontype eq 4}
+			<div class="input-group">
+				<input type="text" name="configoption[{$configoption.id}]" value="{$configoption.selectedqty}" class="form-control" >
+				<span class="input-group-addon">&times; {$configoption.options.0.name}</span>
+			</div>
+			{/if}
+		</div>
+	</div>
+	<hr>
+	{/foreach}
 
-<p class="text-center"><input type="submit" value="{$LANG.ordercontinuebutton}" class="btn btn-primary" /></p>
+	<div class="text-center form-group">
+		<input type="submit" value="{$LANG.ordercontinuebutton}" class="btn btn-primary btn-lg">
+	</div>
 
 </form>
 
 {/if}
-
 {/if}
-
-<br />
-<br />
-<br />

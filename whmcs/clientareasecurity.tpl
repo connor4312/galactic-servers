@@ -1,119 +1,103 @@
-{include file="$template/pageheader.tpl" title=$LANG.clientareanavsecurity}
+<div class="page-header">
+	<h1>{$LANG.clientareanavsecurity}</h1>
+</div>
 
-{include file="$template/clientareadetailslinks.tpl"}
+<ul class="nav nav-tabs">
+	<li><a href="clientarea.php?action=details">{$LANG.clientareanavdetails}</a></li>
+	{if $condlinks.updatecc}<li><a href="clientarea.php?action=creditcard">{$LANG.clientareanavccdetails}</a></li>{/if}
+	<li><a href="clientarea.php?action=contacts">{$LANG.clientareanavcontacts}</a></li>
+	<li><a href="clientarea.php?action=changepw">{$LANG.clientareanavchangepw}</a></li>
+	{if $condlinks.security}<li class="active"><a href="clientarea.php?action=security">{$LANG.clientareanavsecurity}</a></li>{/if}
+</ul>
 
 {if $successful}
-<div class="alert alert-success">
-    <p>{$LANG.changessavedsuccessfully}</p>
+<div class="alert alert-success alert-dismissable">
+	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+	{$LANG.changessavedsuccessfully}
 </div>
 {/if}
 
 {if $errormessage}
-<div class="alert alert-danger">
-    <p class="bold">{$LANG.clientareaerrors}</p>
-    <ul>
-        {$errormessage}
-    </ul>
+<div class="alert alert-danger alert-dismissable">
+	<h4 class="alert-heading">{$LANG.clientareaerrors}</h4>
+	<ul>
+		{$errormessage}
+	</ul>
 </div>
 {/if}
 
 {if $twofaavailable}
-
 {if $twofaactivation}
-
-<script>{literal}
-function dialogSubmit() {
-    $('div#twofaactivation form').attr('method', 'post');
-    $('div#twofaactivation form').attr('action', 'clientarea.php');
-    $('div#twofaactivation form').attr('onsubmit', '');
-    $('div#twofaactivation form').submit();
-    return true;
-}
-{/literal}</script>
-
-<div id="twofaactivation">
-    {$twofaactivation}
-</div>
-
-<script type="text/javascript">
-$("#twofaactivation input:text:visible:first,#twofaactivation input:password:visible:first").focus();
+{literal}
+<script>
+	function dialogSubmit() {
+		$('div#twofaactivation form').attr('method', 'post');
+		$('div#twofaactivation form').attr('action', 'clientarea.php');
+		$('div#twofaactivation form').attr('onsubmit', '');
+		$('div#twofaactivation form').submit();
+		return true;
+	}
 </script>
+{/literal}
 
+<div id="twofaactivation">{$twofaactivation}</div>
 {else}
 
 <h2>{$LANG.twofactorauth}</h2>
-
 <p>{$LANG.twofaactivationintro}</p>
 
-<br />
-
 <form method="post" action="clientarea.php?action=security">
-<input type="hidden" name="2fasetup" value="1" />
-<p align="center">
-{if $twofastatus}
-<input type="submit" value="{$LANG.twofadisableclickhere}" class="btn btn-danger" />
-{else}
-<input type="submit" value="{$LANG.twofaenableclickhere}" class="btn btn-success" />
-{/if}
-</p>
+	<input type="hidden" name="2fasetup" value="1">
+	<p align="center">
+		{if $twofastatus}
+		<input type="submit" value="{$LANG.twofadisableclickhere}" class="btn btn-danger">
+		{else}
+		<input type="submit" value="{$LANG.twofaenableclickhere}" class="btn btn-success">
+		{/if}
+	</p>
 </form>
-
-<br /><br />
-
+{/if}
 {/if}
 
-{/if}
 
 {if $securityquestionsenabled && !$twofaactivation}
 
-<br/><br/>
-
-<h2>{$LANG.clientareanavsecurityquestions}</h2>
-
-<form class="form-horizontal" method="post" action="{$smarty.server.PHP_SELF}?action=changesq">
-
-  <fieldset class="onecol">
-
-{if !$nocurrent}
-    <div class="form-group">
-	    <label class="control-label" for="currentans">{$currentquestion}</label>
-		<div class="controls">
-		    <input type="password" name="currentsecurityqans" id="currentans" />
+<h3>{$LANG.clientareanavsecurityquestions}</h3>
+<form method="post" action="clientarea.php" class="form-horizontal">
+	<input type="hidden" name="action" value="changesq">
+	{if !$nocurrent}
+	<div class="form-group">
+		<label class="col-md-4 control-label" for="currentans">{$currentquestion}</label>
+		<div class="col-md-6">
+			<input type="password" name="currentsecurityqans" id="currentans" class="form-control">
 		</div>
 	</div>
-{/if}
-    <div class="form-group">
-	    <label class="control-label" for="securityqid">{$LANG.clientareasecurityquestion}</label>
-		<div class="controls">
-		    <select name="securityqid" id="securityqid">
-            {foreach key=num item=question from=$securityquestions}
-            	<option value={$question.id}>{$question.question}</option>
-            {/foreach}
-            </select>
+	{/if}
+	<div class="form-group">
+		<label class="col-md-4 control-label" for="securityqid">{$LANG.clientareasecurityquestion}</label>
+		<div class="col-md-6">
+			<select name="securityqid" id="securityqid" class="form-control">
+			{foreach key=num item=question from=$securityquestions}
+				<option value={$question.id}>{$question.question}</option>
+			{/foreach}
+			</select>
 		</div>
 	</div>
-
-    <div class="form-group">
-	    <label class="control-label" for="securityqans">{$LANG.clientareasecurityanswer}</label>
-		<div class="controls">
-		    <input type="password" name="securityqans" id="securityqans" />
+	<div class="form-group">
+		<label class="col-md-4 control-label" for="securityqans">{$LANG.clientareasecurityanswer}</label>
+		<div class="col-md-6">
+			<input type="password" name="securityqans" id="securityqans" class="form-control">
 		</div>
 	</div>
-
-    <div class="form-group">
-	    <label class="control-label" for="securityqans2">{$LANG.clientareasecurityconfanswer}</label>
-		<div class="controls">
-		    <input type="password" name="securityqans2" id="securityqans2" />
+	<div class="form-group">
+		<label class="col-md-4 control-label" for="securityqans2">{$LANG.clientareasecurityconfanswer}</label>
+		<div class="col-md-6">
+			<input type="password" name="securityqans2" id="securityqans2" class="form-control">
 		</div>
 	</div>
-
-  </fieldset>
-
-  <div class="form-actions">
-    <input class="btn btn-primary" type="submit" name="submit" value="{$LANG.clientareasavechanges}" />
-    <input class="btn" type="reset" value="{$LANG.cancel}" />
-  </div>
-
+	<div class="form-group text-center">
+		<input class="btn btn-primary" type="submit" name="submit" value="{$LANG.clientareasavechanges}">
+		<input class="btn btn-default" type="reset" value="{$LANG.cancel}">
+	</div>
 </form>
-
 {/if}

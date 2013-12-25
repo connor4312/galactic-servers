@@ -1,32 +1,31 @@
-{include file="$template/pageheader.tpl" title=$LANG.domaingeteppcode}
-
-<div class="alert alert-block alert-info">
-    <p>{$LANG.domainname}: <strong>{$domain}</strong></p>
+<div class="page-header">
+	<h1>{$LANG.managing} {$domain}</h1>
 </div>
 
-<p>{$LANG.domaingeteppcodeexplanation}</p>
-
-<br />
-
+<div class="row">
+	<div class="col-md-4">
+		<h2>{$LANG.domaingeteppcode}</h2>
+		<p>{$LANG.domaingeteppcodeexplanation}</p>
+	</div>
+	<div class="col-md-8">
 {if $error}
-<div class="alert alert-danger text-center">
-    {$LANG.domaingeteppcodefailure} {$error}
-</div>
+		<div class="alert alert-danger alert-block">
+			<h3 class="alert-heading">{$LANG.domaingeteppcodefailure}</h3>
+			{$error}
+		</div>
+{elseif $eppcode}
+		<div class="alert alert-warning alert-block">
+			<h3 class="alert-heading">{$LANG.domaingeteppcodeis}</h3>
+			{$eppcode}
+		</div>
 {else}
-    {if $eppcode}
-    <div class="alert alert-warn text-center">
-        {$LANG.domaingeteppcodeis} {$eppcode}
-    </div>
-    {else}
-    <div class="alert alert-warn text-center">
-        {$LANG.domaingeteppcodeemailconfirmation}
-    </div>
-    {/if}
+		<div class="alert alert-warning alert-block">
+			{$LANG.domaingeteppcodeemailconfirmation}
+		</div>
 {/if}
+	</div>
+</div>
 
-<br />
-
-<form method="post" action="{$smarty.server.PHP_SELF}?action=domaindetails">
-<input type="hidden" name="id" value="{$domainid}" />
-<p><input type="submit" value="{$LANG.clientareabacklink}" class="btn" /></p>
-</form>
+<div class="text-center margin-bottom">
+	<a href="clientarea.php?action=domaindetails&id={$domainid}" class="btn btn-default" title="{$LANG.clientareabacklink}">{$LANG.clientareabacklink}</a>
+</div>

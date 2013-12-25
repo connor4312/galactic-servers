@@ -1,5 +1,7 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+<meta http-equiv="content-type" content="text/html; charset={$charset}">
 <title>{$companyname} - {$id}</title>
 <link rel="stylesheet" type="text/css" href="templates/{$template}/css/quote.css">
 <link href="includes/jscript/css/ui.all.css" rel="stylesheet" type="text/css" />

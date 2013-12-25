@@ -1,108 +1,133 @@
-{include file="$template/pageheader.tpl" title=$LANG.domainregisterns}
-
-<div class="alert alert-block alert-info">
-    <p>{$LANG.domainname}: <strong>{$domain}</strong</p>
+<div class="page-header">
+	<h1>{$LANG.managing} {$domain}</h1>
 </div>
 
-<p>{$LANG.domainregisternsexplanation}</p>
-
-<br />
-
 {if $result}
-    <div class="alert alert-danger">
-        <p class="bold text-center">{$result}</p>
-    </div>
+<div class="alert alert-info alert-dismissable">
+	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+	{$result}
+</div>
 {/if}
 
-<form method="post" action="{$smarty.server.PHP_SELF}?action=domainregisterns">
-<input type="hidden" name="sub" value="register" />
-<input type="hidden" name="domainid" value="{$domainid}" />
-
-{include file="$template/subheader.tpl" title=$LANG.domainregisternsreg}
-
-<fieldset class="onecol">
-
-    <div class="form-group">
-	    <label class="control-label" for="ns1">{$LANG.domainregisternsns}</label>
-		<div class="controls">
-		    <input type="text" name="ns" id="ns1" class="small" /> . {$domain}
+<div class="tabbable">
+	<ul class="nav nav-tabs" id="nameservertabs">
+		<li class="active"><a href="#tab-create" data-toggle="tab" title="{$LANG.domainregisternsreg}">{$LANG.domainregisternsreg}</a></li>
+		<li><a href="#tab-modify" data-toggle="tab" title="{$LANG.domainregisternsmod}">{$LANG.domainregisternsmod}</a></li>
+		<li><a href="#tab-delete" data-toggle="tab" title="{$LANG.domainregisternsdel}">{$LANG.domainregisternsdel}</a></li>
+	</ul>
+	<div class="tab-content">
+		<div class="tab-pane active" id="tab-create">
+			<div class="row">
+				<div class="col-md-4">
+					<h2>{$LANG.domainregisternsreg}</h2>
+					<p>{$LANG.domainregisternsexplanation}</p>
+				</div>
+				<div class="col-md-8">
+					<form method="post" action="{$smarty.server.PHP_SELF}?action=domainregisterns#tab-create" class="form-horizontal margin-top">
+						<input type="hidden" name="sub" value="register">
+						<input type="hidden" name="domainid" value="{$domainid}">
+						<div class="form-group">
+							<label class="col-md-4 control-label" for="createns">{$LANG.domainregisternsns}</label>
+							<div class="col-md-6">
+								<div class="input-group">
+									<input type="text" name="ns" id="createns" class="form-control">
+									<span class="input-group-addon">.{$domain}</span>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-4 control-label" for="createip">{$LANG.domainregisternsip}</label>
+							<div class="col-md-6">
+								<input type="text" name="ipaddress" id="createip" class="form-control">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-md-8 col-md-offset-4">
+								<a href="clientarea.php?action=domaindetails&amp;id={$domainid}" class="btn btn-default" title="{$LANG.clientareabacklink}">{$LANG.clientareabacklink}</a>
+								<button class="btn btn-primary">{$LANG.clientareasavechanges}</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="tab-pane" id="tab-modify">
+			<div class="row">
+				<div class="col-md-4">
+					<h2>{$LANG.domainregisternsmod}</h2>
+					<p>{$LANG.domainregisternsexplanation}</p>
+				</div>
+				<div class="col-md-8">
+					<form method="post" action="{$smarty.server.PHP_SELF}?action=domainregisterns#tab-modify" class="form-horizontal margin-top">
+						<input type="hidden" name="sub" value="modify">
+						<input type="hidden" name="domainid" value="{$domainid}">
+						<div class="form-group">
+							<label class="col-md-4 control-label" for="modifyns">{$LANG.domainregisternsns}</label>
+							<div class="col-md-6">
+								<div class="input-group">
+									<input type="text" name="ns" id="modifyns" class="form-control">
+									<span class="input-group-addon">.{$domain}</span>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-4 control-label" for="modifyoldip">{$LANG.domainregisternscurrentip}</label>
+							<div class="col-md-6">
+								<input type="text" name="currentipaddress" id="modifyoldip" class="form-control">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-4 control-label" for="modifynewip">{$LANG.domainregisternsnewip}</label>
+							<div class="col-md-6">
+								<input type="text" name="newipaddress" id="modifynewip" class="form-control">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-md-8 col-md-offset-4">
+								<a href="clientarea.php?action=domaindetails&amp;id={$domainid}" class="btn btn-default" title="{$LANG.clientareabacklink}">{$LANG.clientareabacklink}</a>
+								<button class="btn btn-primary">{$LANG.clientareasavechanges}</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="tab-pane" id="tab-delete">
+			<div class="row">
+				<div class="col-md-4">
+					<h2>{$LANG.domainregisternsdel}</h2>
+					<p>{$LANG.domainregisternsexplanation}</p>
+				</div>
+				<div class="col-md-8">
+					<form method="post" action="{$smarty.server.PHP_SELF}?action=domainregisterns#tab-delete" class="form-horizontal margin-top">
+						<input type="hidden" name="sub" value="delete">
+						<input type="hidden" name="domainid" value="{$domainid}">
+						<div class="form-group">
+							<label class="col-md-4 control-label" for="deletens">{$LANG.domainregisternsns}</label>
+							<div class="col-md-6">
+								<div class="input-group">
+									<input type="text" name="ns" id="deletens" class="form-control">
+									<span class="input-group-addon">.{$domain}</span>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-md-8 col-md-offset-4">
+								<a href="clientarea.php?action=domaindetails&amp;id={$domainid}" class="btn btn-default" title="{$LANG.clientareabacklink}">{$LANG.clientareabacklink}</a>
+								<button class="btn btn-primary">{$LANG.clientareasavechanges}</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
 		</div>
 	</div>
+</div>
 
-    <div class="form-group">
-	    <label class="control-label" for="ip1">{$LANG.domainregisternsip}</label>
-		<div class="controls">
-		    <input type="text" name="ipaddress" id="ip1" />
-		</div>
-	</div>
-
-    <p align="center"><input type="submit" value="{$LANG.clientareasavechanges}" class="btn btn-primary" /></p>
-
-</fieldset>
-
-</form>
-
-<br />
-
-<form method="post" action="{$smarty.server.PHP_SELF}?action=domainregisterns">
-<input type="hidden" name="sub" value="modify" />
-<input type="hidden" name="domainid" value="{$domainid}" />
-
-{include file="$template/subheader.tpl" title=$LANG.domainregisternsmod}
-
-<fieldset class="onecol">
-
-    <div class="form-group">
-	    <label class="control-label" for="ns2">{$LANG.domainregisternsns}</label>
-		<div class="controls">
-		    <input type="text" name="ns" id="ns2" class="small" /> . {$domain}
-		</div>
-	</div>
-
-    <div class="form-group">
-	    <label class="control-label" for="ip2">{$LANG.domainregisternscurrentip}</label>
-		<div class="controls">
-		    <input type="text" name="currentipaddress" id="ip2" />
-		</div>
-	</div>
-
-    <div class="form-group">
-	    <label class="control-label" for="ip3">{$LANG.domainregisternsnewip}</label>
-		<div class="controls">
-		    <input type="text" name="newipaddress" id="ip3" />
-		</div>
-	</div>
-
-    <p align="center"><input type="submit" value="{$LANG.clientareasavechanges}" class="btn btn-primary" /></p>
-
-</fieldset>
-
-</form>
-
-<br />
-
-<form method="post" action="{$smarty.server.PHP_SELF}?action=domainregisterns">
-<input type="hidden" name="sub" value="delete" />
-<input type="hidden" name="domainid" value="{$domainid}" />
-
-{include file="$template/subheader.tpl" title=$LANG.domainregisternsdel}
-
-<fieldset class="onecol">
-
-    <div class="form-group">
-	    <label class="control-label" for="ns3">{$LANG.domainregisternsns}</label>
-		<div class="controls">
-		    <input type="text" name="ns" id="ns3" class="small" /> . {$domain}
-		</div>
-	</div>
-
-    <p align="center"><input type="submit" value="{$LANG.clientareasavechanges}" class="btn btn-primary" /></p>
-
-</fieldset>
-
-</form>
-
-<form method="post" action="{$smarty.server.PHP_SELF}?action=domaindetails">
-<input type="hidden" name="id" value="{$domainid}" />
-<p><input type="submit" value="{$LANG.clientareabacklink}" class="btn" /></p>
-</form>
+{literal}
+<script type="text/javascript">
+   $(function() {
+      if(window.location.hash != "") { $('.tabbable > .nav-tabs > li > a[href="'+window.location.hash+'"]').tab('show'); }
+   });
+</script>
+{/literal}

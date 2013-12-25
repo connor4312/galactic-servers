@@ -1,21 +1,15 @@
-<div class="halfwidthcontainer">
-
-{include file="$template/pageheader.tpl" title=$LANG.accessdenied}
-
-<p>{$LANG.bannedyourip} {$ip} {$LANG.bannedhasbeenbanned}</p>
-
-<br />
-
-<div class="alert alert-danger">
-    <ul>
-        <li>{$LANG.bannedbanreason}: <strong>{$reason}</strong></li>
-    	<li>{$LANG.bannedbanexpires}: {$expires}</li>
-    </ul>
+<div class="page-header">
+	<h1>{$LANG.accessdenied}</h1>
 </div>
 
-<br />
-<br />
-<br />
-<br />
-
+<div class="row">
+	<div class="col-md-6 col-md-offset-3">
+		<div class="alert alert-danger">
+			<h2 class="alert-heading">{$LANG.bannedyourip} {$ip} {$LANG.bannedhasbeenbanned}</h2>
+			<ul>
+				<li>{$LANG.bannedbanreason}: {$reason}</li>
+				<li>{$LANG.bannedbanexpires}: {$expires}</li>
+			</ul>
+		</div>
+	</div>
 </div>

@@ -1,82 +1,54 @@
-{include file="$template/pageheader.tpl" title=$LANG.clientareacancelrequest}
+<div class="page-header">
+	<h1>{$LANG.clientareacancelrequest}</h1>
+</div>
 
 {if $invalid}
-
-<div class="alert alert-warning">
-    <p>{$LANG.clientareacancelinvalid}</p>
+<div class="alert alert-warning">{$LANG.clientareacancelinvalid}</div>
+<div class="text-center margin-bottom">
+	<a href="clientarea.php?action=productdetails&id={$id}" title="{$LANG.clientareabacklink}" class="btn btn-default">{$LANG.clientareabacklink}</a>
 </div>
-
-<div class="text-center">
-    <input type="button" value="{$LANG.clientareabacklink}" class="btn" onclick="window.location='clientarea.php?action=productdetails&id={$id}'" />
-</div>
-
-<br /><br /><br />
 
 {elseif $requested}
 
-<div class="alert alert-success">
-    <p>{$LANG.clientareacancelconfirmation}</p>
+<div class="alert alert-success">{$LANG.clientareacancelconfirmation}</div>
+<div class="text-center margin-bottom">
+	<a href="clientarea.php?action=productdetails&id={$id}" title="{$LANG.clientareabacklink}" class="btn btn-default">{$LANG.clientareabacklink}</a>
 </div>
-
-<div class="text-center">
-    <input type="button" value="{$LANG.clientareabacklink}" class="btn" onclick="window.location='clientarea.php?action=productdetails&id={$id}'" />
-</div>
-
-<br /><br /><br />
 
 {else}
 
-{if $error}
-<div class="alert alert-danger">
-    <p class="bold">{$LANG.clientareaerrors}</p>
-    <ul>
-        <li>{$LANG.clientareacancelreasonrequired}</li>
-    </ul>
+	{if $error}
+<div class="alert alert-danger alert-dismissable">
+	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+	{$LANG.clientareacancelreasonrequired}
 </div>
-{/if}
-
-<div class="alert alert-block alert-info">
-    <p>{$LANG.clientareacancelproduct}: <strong>{$groupname} - {$productname}</strong>{if $domain} ({$domain}){/if}</p>
+	{/if}
+	
+<div class="alert alert-info alert-block">
+	{$LANG.clientareacancelproduct}: <strong>{if $groupname}{$groupname} - {/if}{$productname}</strong>{if $domain} ({$domain}){/if}
 </div>
 
-<form method="post" action="{$smarty.server.PHP_SELF}?action=cancel&amp;id={$id}" class="form-stacked">
-<input type="hidden" name="sub" value="submit" />
-
-    <fieldset class="form-group">
-
-        <div class="form-group">
-            <label class="control-label" for="cancellationreason">{$LANG.clientareacancelreason}</label>
-        	<div class="controls">
-        	    <textarea name="cancellationreason" id="cancellationreason" rows="6" class="fullwidth"></textarea>
-        	</div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label" for="type">{$LANG.clientareacancellationtype}</label>
-        	<div class="controls">
-        	    <select name="type" id="type">
-                <option value="Immediate">{$LANG.clientareacancellationimmediate}</option>
-                <option value="End of Billing Period">{$LANG.clientareacancellationendofbillingperiod}</option>
-                </select>
-        	</div>
-        </div>
-
-        {if $domainid}
-        <br />
-        <div class="alert alert-block alert-warn text-center">
-        <p><strong>{$LANG.cancelrequestdomain}</strong></p>
-        <p>{$LANG.cancelrequestdomaindesc|sprintf2:$domainnextduedate:$domainprice:$domainregperiod}</p>
-        <p><label class="checkbox"><input type="checkbox" name="canceldomain" id="canceldomain" /> {$LANG.cancelrequestdomainconfirm}</label></p>
-        </div>
-        {/if}
-
-        <div class="form-actions">
-            <input type="submit" value="{$LANG.clientareacancelrequestbutton}" class="btn btn-danger" />
-            <input type="button" value="{$LANG.cancel}" class="btn" onclick="window.location='clientarea.php?action=productdetails&id={$id}'" />
-        </div>
-
-    </fieldset>
-
+<form method="post" action="{$smarty.server.PHP_SELF}">
+	<input type="hidden" name="sub" value="submit">
+	<input type="hidden" name="action" value="cancel">
+	<input type="hidden" name="id" value="{$id}">
+	<label for="cancellationreason">{$LANG.clientareacancelreason}</label>
+	<textarea name="cancellationreason" id="cancellationreason" rows="6" class="col-md-12"></textarea>
+	<label for="type">{$LANG.clientareacancellationtype}</label>
+	<select name="type" id="type">
+		<option value="Immediate">{$LANG.clientareacancellationimmediate}</option>
+		<option value="End of Billing Period">{$LANG.clientareacancellationendofbillingperiod}</option>
+	</select>
+	{if $domainid}
+	<div class="alert alert-warning alert-block">
+		<h4 class="alert-heading">{$LANG.cancelrequestdomain}</h4>
+		{$LANG.cancelrequestdomaindesc|sprintf2:$domainnextduedate:$domainprice:$domainregperiod}
+		<label class="checkbox-inline"><input type="checkbox" name="canceldomain" id="canceldomain"> {$LANG.cancelrequestdomainconfirm}</label>
+	</div>
+	{/if}
+	<div class="form-actions">
+		<input type="submit" name="submit" value="{$LANG.clientareacancelrequestbutton}" class="btn btn-danger">
+		<a href="clientarea.php?action=productdetails&id={$id}" class="btn btn-default" title="{$LANG.cancel}">{$LANG.cancel}</a>
+	</div>
 </form>
-
 {/if}

@@ -1,33 +1,48 @@
-{include file="$template/pageheader.tpl" title=$LANG.clientareaemails desc=$LANG.emailstagline}
+<div class="page-header">
+	<h1>{$LANG.clientareaemails} <small>{$LANG.emailstagline}</small></h1>
+</div>
 
 <p>{$numitems} {$LANG.recordsfound}, {$LANG.page} {$pagenumber} {$LANG.pageof} {$totalpages}</p>
 
-<br />
-
-<table class="table table-striped table-framed">
-    <thead>
-        <tr>
-            <th{if $orderby eq "date"} class="headerSort{$sort}"{/if}><a href="clientarea.php?action=emails&orderby=date">{$LANG.clientareaemailsdate}</a></th>
-            <th{if $orderby eq "subject"} class="headerSort{$sort}"{/if}><a href="clientarea.php?action=emails&orderby=subject">{$LANG.clientareaemailssubject}</a></th>
-            <th>&nbsp;</th>
-        </tr>
-    </thead>
-    <tbody>
-{foreach from=$emails item=email}
-        <tr>
-            <td>{$email.date}</td>
-            <td>{$email.subject}</td>
-            <td class="text-center"><input type="button" class="btn btn-info" value="{$LANG.emailviewmessage}" onclick="popupWindow('viewemail.php?id={$email.id}','emlmsg',650,400)" /></td>
-        </tr>
-{foreachelse}
-        <tr>
-            <td colspan="3" class="text-center">{$LANG.norecordsfound}</td>
-        </tr>
-{/foreach}
-    </tbody>
+<table class="table table-striped table-bordered table-sorted">
+	<thead>
+		<tr>
+			<th{if $orderby eq "date"} class="sort-{$sort}"{/if}><a href="clientarea.php?action=emails&amp;orderby=date">{$LANG.clientareaemailsdate}</a></th>
+			<th{if $orderby eq "subject"} class="sort-{$sort}"{/if}><a href="clientarea.php?action=emails&amp;orderby=subject">{$LANG.clientareaemailssubject}</a></th>
+		</tr>
+	</thead>
+	<tbody>
+		{foreach from=$emails item=email}
+		<tr>
+			<td>{$email.date}</td>
+			<td><a href="viewemail.php?id={$email.id}" onclick="viewEmail({$email.id});return false;" title="{$LANG.emailviewmessage}">{$email.subject}</a></td>
+		</tr>
+		{foreachelse}
+		<tr>
+			<td colspan="2" class="text-center">{$LANG.norecordsfound}</td>
+		</tr>
+		{/foreach}
+	</tbody>
 </table>
 
-<ul class="pager">
-    <li class="prev{if !$prevpage} disabled{/if}"><a href="{if $prevpage}clientarea.php?action=emails&amp;page={$prevpage}{else}javascript:return false;{/if}">&larr; {$LANG.previouspage}</a></li>
-    <li class="next{if !$nextpage} disabled{/if}"><a href="{if $nextpage}clientarea.php?action=emails&amp;page={$nextpage}{else}javascript:return false;{/if}">{$LANG.nextpage} &rarr;</a></li>
+<ul class="pagination">
+	<li{if !$prevpage} class="disabled"{/if}><a href="{if $prevpage}clientarea.php?action={$clientareaaction}&amp;page={$prevpage}{else}javascript:return false;{/if}">&larr; {$LANG.previouspage}</a></li>
+	<li{if !$nextpage} class="disabled"{/if}><a href="{if $nextpage}clientarea.php?action={$clientareaaction}&amp;page={$nextpage}{else}javascript:return false;{/if}">{$LANG.nextpage} &rarr;</a></li>
 </ul>
+
+<div class="modal fade" id="modalviewemail">
+	<div class="modal-dialog">
+		<div class="modal-content">
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+{literal}
+	function viewEmail(id) {
+		$('#modalviewemail .modal-content').html('<div class="modal-body"><p class="text-center"><img src="images/loadingsml.gif" alt="{$LANG.pleasewait}"></p></div>');
+		$('#modalviewemail .modal-content').load('viewemail.php?id='+id);
+		$('#modalviewemail').modal();
+	}
+{/literal}
+</script>

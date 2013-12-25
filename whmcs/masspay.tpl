@@ -1,84 +1,83 @@
-{include file="$template/pageheader.tpl" title=$LANG.masspaytitle desc=$LANG.masspayintro}
-
-<form method="post" action="clientarea.php?action=masspay" class="form-horizontal">
-<input type="hidden" name="geninvoice" value="true" />
-
-<br />
-
-<div class="center80">
-<table class="table table-striped table-framed">
-    <thead>
-        <tr>
-            <th>{$LANG.invoicesdescription}</th>
-            <th>{$LANG.invoicesamount}</th>
-        </tr>
-    </thead>
-    <tbody>
-{foreach from=$invoiceitems key=invid item=invoiceitem}
-        <tr>
-            <td colspan="2">
-                <strong>{$LANG.invoicenumber} {$invid}</strong>
-                <input type="hidden" name="invoiceids[]" value="{$invid}" />
-            </td>
-        </tr>
-{foreach from=$invoiceitem item=item}
-        <tr>
-            <td>{$item.description}</td>
-            <td>{$item.amount}</td>
-        </tr>
-{/foreach}
-{foreachelse}
-        <tr>
-            <td colspan="6" align="center">{$LANG.norecordsfound}</td>
-        </tr>
-{/foreach}
-        <tr class="subtotal">
-            <td style="text-align:right;">{$LANG.invoicessubtotal}:</td>
-            <td>{$subtotal}</td>
-        </tr>
-        {if $tax}<tr class="tax">
-            <td style="text-align:right;">{$LANG.invoicestax}:</td>
-            <td>{$tax}</td>
-        </tr>{/if}
-        {if $tax2}<tr class="tax">
-            <td style="text-align:right;">{$LANG.invoicestax} 2:</td>
-            <td>{$tax2}</td>
-        </tr>{/if}
-        {if $credit}<tr class="credit">
-            <td style="text-align:right;">{$LANG.invoicescredit}:</td>
-            <td>{$credit}</td>
-        </tr>{/if}
-        {if $partialpayments}<tr class="credit">
-            <td style="text-align:right;">{$LANG.invoicespartialpayments}:</td>
-            <td>{$partialpayments}</td>
-        </tr>{/if}
-        <tr class="total">
-            <td style="text-align:right;">{$LANG.invoicestotaldue}:</td>
-            <td>{$total}</td>
-        </tr>
-    </tbody>
-</table>
+<div class="page-header">
+	<h1>{$LANG.masspaytitle} <small>{$LANG.masspayintro}</small></h1>
 </div>
 
-<div class="center80">
+<form method="post" action="clientarea.php?action=masspay">
+	<input type="hidden" name="geninvoice" value="true">
 
-<h3>{$LANG.orderpaymentmethod}</h3>
+	<table class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th>{$LANG.invoicesdescription}</th>
+				<th>{$LANG.invoicesamount}</th>
+			</tr>
+		</thead>
+		<tbody>
+			{foreach from=$invoiceitems key=invid item=invoiceitem}
+			<tr>
+				<td colspan="2"><strong>{$LANG.invoicenumber} {$invid}</strong> <input type="hidden" name="invoiceids[]" value="{$invid}"></td>
+			</tr>
+			{foreach from=$invoiceitem item=item}
+			<tr>
+				<td>{$item.description}</td>
+				<td>{$item.amount}</td>
+			</tr>
+			{/foreach}
+			{foreachelse}
+			<tr>
+				<td colspan="2" class="text-center">{$LANG.norecordsfound}</td>
+			</tr>
+			{/foreach}
+		</tbody>
+		<tfoot>
+			<tr>
+				<td class="text-right">{$LANG.invoicessubtotal}:</td>
+				<td>{$subtotal}</td>
+			</tr>
+			<tr>
+			{if $tax}
+			<tr>
+				<td class="text-right">{$LANG.invoicestax}:</td>
+				<td>{$tax}</td>
+			</tr>
+			{/if}
+			{if $tax2}
+			<tr>
+				<td class="text-right">{$LANG.invoicestax} 2:</td>
+				<td>{$tax2}</td>
+			</tr>
+			{/if}
+			{if $credit}
+			<tr>
+				<td class="text-right">{$LANG.invoicescredit}:</td>
+				<td>{$credit}</td>
+			</tr>
+			{/if}
+			{if $partialpayments}
+			<tr>
+				<td class="text-right">{$LANG.invoicespartialpayments}:</td>
+				<td>{$partialpayments}</td>
+			</tr>
+			{/if}
+			<tr>
+				<td class="text-right">{$LANG.invoicestotaldue}:</td>
+				<td>{$total}</td>
+			</tr>
+		</tfoot>
+	</table>
 
-{foreach from=$gateways key=num item=gateway}
-<label class="radio inline">
-<input type="radio" class="radio inline" name="paymentmethod" value="{$gateway.sysname}"{if $gateway.sysname eq $defaultgateway} checked{/if} /> {$gateway.name}
-</label>
-{/foreach}
-
-<br />
-<br />
-
-<p align="center"><input type="submit" value="{$LANG.masspaymakepayment}" class="btn btn-success btn-large" /></p>
-
-</div>
-
-<br />
-<br />
-<br />
+	<div class="well well-sm text-center">
+		<h3>{$LANG.orderpaymentmethod}</h3>
+			<div class="row form-group">
+				<div class="col-md-6 col-md-offset-3">
+					<select name="paymentmethod" class="form-control">
+						{foreach from=$gateways key=num item=gateway}
+						<option value="{$gateway.sysname}"{if $gateway.sysname eq $defaultgateway} selected="selected"{/if}>{$gateway.name}</option>
+						{/foreach}
+					</select>
+				</div>
+			</div>
+			<div><button class="btn btn-primary btn-lg">{$LANG.masspaymakepayment}</button></div>
+	</div>
 
 </form>

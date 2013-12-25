@@ -1,140 +1,157 @@
-{include file="$template/pageheader.tpl" title=$LANG.clientareanavccdetails}
+<div class="page-header">
+	<h1>{$LANG.clientareanavccdetails}</h1>
+</div>
 
-{include file="$template/clientareadetailslinks.tpl"}
+<div class="tabbable">
+	<ul class="nav nav-tabs">
+		<li><a href="clientarea.php?action=details">{$LANG.clientareanavdetails}</a></li>
+		<li class="active"><a href="clientarea.php?action=creditcard">{$LANG.clientareanavccdetails}</a></li>
+		<li><a href="clientarea.php?action=contacts">{$LANG.clientareanavcontacts}</a></li>
+		<li><a href="clientarea.php?action=changepw">{$LANG.clientareanavchangepw}</a></li>
+		{if $condlinks.security}<li><a href="clientarea.php?action=security">{$LANG.clientareanavsecurity}</a></li>{/if}
+	</ul>
+</div>
 
 {if $remoteupdatecode}
-
-  <div align="center">
-    {$remoteupdatecode}
-  </div>
-
+	{$removeupdatecode}
 {else}
 
 {if $successful}
-<div class="alert alert-success">
-    <p>{$LANG.changessavedsuccessfully}</p>
+<div class="alert alert-success alert-dismissable">
+	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+	{$LANG.changessavedsuccessfully}
 </div>
 {/if}
 
 {if $errormessage}
 <div class="alert alert-danger">
-    <p class="bold">{$LANG.clientareaerrors}</p>
-    <ul>
-        {$errormessage}
-    </ul>
+	<h4 class="alert-heading">{$LANG.clientareaerrors}</h4>
+	<ul>
+		{$errormessage}
+	</ul>
 </div>
 {/if}
 
-<form class="form-horizontal" method="post" action="{$smarty.server.PHP_SELF}?action=creditcard">
+<form class="form-horizontal" method="post" action="clientarea.php">
+	<input type="hidden" name="action" value="creditcard">
 
-  <fieldset class="onecol">
-
-    <div class="form-group">
-	    <label class="control-label">{$LANG.creditcardcardtype}</label>
-		<div class="controls">
-		    <input type="text" value="{$cardtype}" disabled="true" />
+<div class="row">
+	<div class="col-md-6">
+		<h3>{$LANG.creditcarddetails}</h3>
+			<div class="form-group">
+				<label class="col-md-4 control-label">{$LANG.creditcardcardtype}</label>
+				<div class="col-md-8">
+					<input type="text" value="{$cardtype}" readonly="readonly" class="form-control">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-4 control-label">{$LANG.creditcardcardnumber}</label>
+				<div class="col-md-8">
+					<input type="text" value="{$cardnum}" readonly="readonly" class="form-control">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-4 control-label">{$LANG.creditcardcardexpires}</label>
+				<div class="col-md-8">
+					<input type="text" value="{$cardexp}" readonly="readonly" class="form-control">
+				</div>
+			</div>
+			{if $cardissuenum}
+			<div class="form-group">
+				<label class="col-md-4 control-label">{$LANG.creditcardcardissuenum}</label>
+				<div class="col-md-8">
+					<input type="text" value="{$cardissuenum}" readonly="readonly" class="form-control">
+				</div>
+			</div>
+			{/if}
+			{if $cardstart}
+			<div class="form-group">
+				<label class="col-md-4 control-label">{$LANG.creditcardcardstart}</label>
+				<div class="col-md-8">
+					<input type="text" value="{$cardstart}" readonly="readonly" class="form-control">
+				</div>
+			</div>
+			{/if}
+			{if $allowcustomerdelete && $cardtype}
+			<div class="text-right">
+				<a href="clientarea.php?action=creditcard&amp;delete=true" class="btn btn-danger">{$LANG.creditcarddelete}</a>
+			</div>
+			{/if}
 		</div>
+		<div class="col-md-6">
+			<h3 class="margin-bottom">{$LANG.creditcardenternewcard}</h3>
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="cctype">{$LANG.creditcardcardtype}</label>
+				<div class="col-md-8">
+					<select name="cctype" id="cctype" class="form-control">
+					{foreach key=num item=cardtype from=$acceptedcctypes}
+						<option>{$cardtype}</option>
+					{/foreach}
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="ccnumber">{$LANG.creditcardcardnumber}</label>
+				<div class="col-md-8">
+					<input type="text" name="ccnumber" id="ccnumber" autocomplete="off" class="form-control">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="ccexpirymonth">{$LANG.creditcardcardexpires}</label>
+				<div class="col-md-8">
+					<div class="input-group">
+						<select name="ccexpirymonth" id="ccexpirymonth" class="form-control">
+						{foreach from=$months item=month}
+							<option>{$month}</option>
+						{/foreach}
+						</select>
+						<span class="input-group-addon">/</span>
+						<select name="ccexpiryyear" class="form-control">
+						{foreach from=$expiryyears item=year}
+							<option>{$year}</option>
+						{/foreach}
+						</select>
+					</div>
+				</div>
+			</div>
+			{if $showccissuestart}
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="ccstartmonth">{$LANG.creditcardcardstart}</label>
+				<div class="col-md-8">
+					<div class="input-group">
+						<select name="ccstartmonth" id="ccstartmonth" class="form-control">
+							{foreach from=$months item=month}
+							<option>{$month}</option>
+							{/foreach}
+						</select>
+						<span class="input-group-addon">/</span>
+						<select name="ccstartyear" class="form-control">
+							{foreach from=$startyears item=year}
+							<option>{$year}</option>
+							{/foreach}
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="ccissuenum">{$LANG.creditcardcardissuenum}</label>
+				<div class="col-md-8">
+					<input type="text" name="ccissuenum" id="ccissuenum" maxlength="3" class="form-control">
+				</div>
+			</div>
+			{/if}
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="cardcvv">{$LANG.creditcardcvvnumber}</label>
+				<div class="col-md-8">
+					<input type="text" class="form-control" name="cardcvv" id="cardcvv" value="{$cardcvv}" autocomplete="off">
+				</div>
+			</div>
+			<div class="form-group text-right">
+				<input class="btn btn-primary" type="submit" name="submit" value="{$LANG.clientareasavechanges}">
+				<input class="btn btn-default" type="reset" value="{$LANG.cancel}">
+			</div>
+		</form>
+		{/if}
 	</div>
+</div>
 
-    <div class="form-group">
-	    <label class="control-label">{$LANG.creditcardcardnumber}</label>
-		<div class="controls">
-		    <input type="text" value="{$cardnum}" disabled="true" />
-		</div>
-	</div>
-
-    <div class="form-group">
-	    <label class="control-label">{$LANG.creditcardcardexpires}</label>
-		<div class="controls">
-		    <input type="text" value="{$cardexp}" disabled="true" class="input-small" />
-		</div>
-	</div>
-{if $cardissuenum}
-    <div class="form-group">
-	    <label class="control-label">{$LANG.creditcardcardissuenum}</label>
-		<div class="controls">
-		    <input type="text" value="{$cardissuenum}" disabled="true" class="input-small" />
-		</div>
-	</div>
-{/if}{if $cardstart}
-    <div class="form-group">
-	    <label class="control-label">{$LANG.creditcardcardstart}</label>
-		<div class="controls">
-		    <input type="text" value="{$cardstart}" disabled="true" class="input-mini" />
-		</div>
-	</div>
-{/if}
-{if $allowcustomerdelete && $cardtype}
-    <div class="form-group">
-	    <label class="control-label">&nbsp;</label>
-		<div class="controls">
-            <input class="btn btn-danger" type="button" value="{$LANG.creditcarddelete}" onclick="window.location='clientarea.php?action=creditcard&delete=true'" />
-        </div>
-    </div>
-{/if}
-  </fieldset>
-
-<div class="styled_title"><h3>{$LANG.creditcardenternewcard}</h3></div>
-
-  <br />
-
-  <fieldset class="onecol">
-
-    <div class="form-group">
-	    <label class="control-label" for="cctype">{$LANG.creditcardcardtype}</label>
-		<div class="controls">
-		    <select name="cctype" id="cctype">
-            {foreach key=num item=cardtype from=$acceptedcctypes}
-                <option>{$cardtype}</option>
-            {/foreach}
-            </select>
-		</div>
-	</div>
-
-    <div class="form-group">
-	    <label class="control-label" for="ccnumber">{$LANG.creditcardcardnumber}</label>
-		<div class="controls">
-		    <input type="text" name="ccnumber" id="ccnumber" autocomplete="off" />
-		</div>
-	</div>
-
-    <div class="form-group">
-	    <label class="control-label" for="ccexpirymonth">{$LANG.creditcardcardexpires}</label>
-		<div class="controls">
-		    <select name="ccexpirymonth" id="ccexpirymonth">{foreach from=$months item=month}<option>{$month}</option>{/foreach}</select> / <select name="ccexpiryyear">{foreach from=$expiryyears item=year}<option>{$year}</option>{/foreach}</select>
-		</div>
-	</div>
-{if $showccissuestart}
-    <div class="form-group">
-	    <label class="control-label" for="ccstartmonth">{$LANG.creditcardcardstart}</label>
-		<div class="controls">
-		    <select name="ccstartmonth" id="ccstartmonth">{foreach from=$months item=month}<option>{$month}</option>{/foreach}</select> / <select name="ccstartyear">{foreach from=$startyears item=year}<option>{$year}</option>{/foreach}</select>
-		</div>
-	</div>
-
-    <div class="form-group">
-	    <label class="control-label" for="ccissuenum">{$LANG.creditcardcardissuenum}</label>
-		<div class="controls">
-		    <input type="text" name="ccissuenum" id="ccissuenum" maxlength="3" class="input-small" />
-		</div>
-	</div>
-{/if}
-
-    <div class="form-group">
-	    <label class="control-label">{$LANG.creditcardcvvnumber}</label>
-		<div class="controls">
-		    <input type="text" name="cardcvv" id="cardcvv" value="{$cardcvv}" autocomplete="off" />
-		</div>
-	</div>
-
-
-  </fieldset>
-
-  <div class="form-actions">
-    <input class="btn btn-primary" type="submit" name="submit" value="{$LANG.clientareasavechanges}" />
-    <input class="btn" type="reset" value="{$LANG.cancel}" />
-  </div>
-
-</form>
-
-{/if}

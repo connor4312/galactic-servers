@@ -1,21 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>{$LANG.clientareaemails} - {$companyname}</title>
-
-    <link href="templates/{$template}/css/bootstrap.css" rel="stylesheet">
-    <link href="templates/{$template}/css/whmcs.css" rel="stylesheet">
-
-  </head>
-
-  <body class="popupwindow">
-
-<h2>{$subject}</h2>
-
-<div class="popupcontainer">{$message}</div>
-
-<p class="text-center"><input type="button" value="{$LANG.closewindow}" class="btn btn-primary" onclick="window.close()" /></p>
-
-  </body>
-</html>
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	<h4>{$subject}</h4>
+</div>
+<div class="modal-body">{$message}</div>
+<div class="modal-footer">
+	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div>

@@ -1,27 +1,19 @@
-<br /><br />
+<p>{$LANG.creditcard3dsecure}</p>
 
-<p class="text-center">{$LANG.creditcard3dsecure}</p>
+<div id="submitfrm">
 
-<br />
+	{$code}
 
-<div id="submitfrm" class="text-center">
-
-{$code}
-
-<br /><br />
-
-<iframe name="3dauth" height="500" scrolling="auto" src="about:blank" style="width:80%;border:1px solid #fff;"></iframe>
+	<iframe name="3dauth" width="400" height="500" scrolling="auto" src="about:blank"></iframe>
 
 </div>
 
-<br /><br /><br />
-
 {literal}
-<script language="javascript">
-setTimeout ( "autoForward()" , 1000 );
-function autoForward() {
-	var submitForm = $("#submitfrm").find("form");
-    submitForm.submit();
-}
+<script type="text/javascript">
+	setTimeout ( "autoForward()" , 1000 );
+	function autoForward() {
+		var submitForm = $("#submitfrm").find("form");
+		submitForm.submit();
+	}
 </script>
 {/literal}

@@ -1,81 +1,70 @@
-{include file="$template/pageheader.tpl" title=$LANG.contacttitle desc=$LANG.contactheader}
+<div class="page-header">
+	<h1>{$LANG.contacttitle} <small>{$LANG.contactheader}</small></h1>
+</div>
 
 {if $sent}
-
-<br />
-
-<div class="alert alert-success text-center">
-    <p><strong>{$LANG.contactsent}</strong></p>
+<div class="alert alert-success alert-dismissable">
+	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+	<strong>{$LANG.contactsent}</strong>
 </div>
-
-{else}
-
-{if $errormessage}
-<div class="alert alert-danger">
-    <p class="bold">{$LANG.clientareaerrors}</p>
-    <ul>
-        {$errormessage}
-    </ul>
+{elseif $errormessage}
+<div class="alert alert-danger alert-dismissable">
+	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+	<h4 class="alert-heading">{$LANG.clientareaerrors}</h4>
+	<ul>
+		{$errormessage}
+	</ul>
 </div>
 {/if}
 
-<form method="post" action="contact.php?action=send" class="form-stacked center95">
-
-    <fieldset class="form-group">
-
-	    <div class="row">
-            <div class="multicol">
-                <div class="form-group">
-        		    <label class="control-label bold" for="name">{$LANG.supportticketsclientname}</label>
-        			<div class="controls">
-        			    <input class="input-xlarge" type="text" name="name" id="name" value="{$name}" />
-        			</div>
-        		</div>
-        	</div>
-            <div class="multicol">
-                <div class="form-group">
-        		    <label class="control-label bold" for="email">{$LANG.supportticketsclientemail}</label>
-        			<div class="controls">
-        			    <input class="input-xlarge" type="text" name="email" id="email" value="{$email}" />
-        			</div>
-        		</div>
-        	</div>
-        </div>
-
-        <div class="row">
-    	    <div class="form-group">
-    		    <label class="control-label bold" for="subject">{$LANG.supportticketsticketsubject}</label>
-    			<div class="controls">
-    			    <input class="input-xlarge" type="text" name="subject" id="subject" value="{$subject}" style="width:80%;" />
-    			</div>
-    		</div>
-		</div>
-
-        <div class="form-group">
-		    <label class="control-label bold" for="message">{$LANG.contactmessage}</label>
-			<div class="controls">
-			    <textarea name="message" id="message" rows="12" class="fullwidth">{$message}</textarea>
+<form method="post" action="contact.php?action=send">
+	<fieldset>
+		<div class="form-group row">
+			<div class="col-md-6">
+				<label for="name">{$LANG.supportticketsclientname}</label>
+				<input class="form-control" type="text" name="name" id="name" value="{$name}">
+			</div>
+			<div class="col-md-6">
+				<label for="email">{$LANG.supportticketsclientemail}</label>
+				<input class="form-control" type="text" name="email" id="email" value="{$email}">
 			</div>
 		</div>
+		<div class="form-group">
+			<label for="subject">{$LANG.supportticketsticketsubject}</label>
+			<input class="form-control" type="text" name="subject" id="subject" value="{$subject}">
+		</div>
+		<div class="form-group">
+			<label for="message">{$LANG.contactmessage}</label>
+			<textarea name="message" id="message" rows="12" class="form-control">{$message}</textarea>
+		</div>
 
-    </fieldset>
+		{if $capatacha}
+		<div class="form-group row">
+			<div class="col-md-6 col-md-offset-3">
+				<div class="panel panel-default">
+					<div class="panel-body text-center">
+						<h3>{$LANG.captchatitle}</h3>
+						<p>{$LANG.captchaverify}</p>
+						<div class="text-center">
+							{if $capatacha eq "recaptcha"}
+							{$recapatchahtml}
+							{else}
+							<div class="col-md-3 col-md-offset-3">
+								<input type="text" name="code" class="form-control input-sm" maxlength="5">
+							</div>
+							<div class="col-md-6 text-left">
+								<img src="includes/verifyimage.php" alt="captcha" style="margin-bottom: 20px;">
+							</div>
+							{/if}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		{/if}
 
-{if $capatacha}
-<p><strong>&nbsp;&raquo;&nbsp;{$LANG.captchatitle}</strong></p>
-<p>{$LANG.captchaverify}</p>
-{if $capatacha eq "recaptcha"}
-<div align="center">{$recapatchahtml}</div>
-{else}
-<p align="center"><img src="includes/verifyimage.php" align="middle" /> <input type="text" class="input-small" name="code" size="10" maxlength="5" /></p>
-{/if}
-{/if}
-
-    <p align="center"><input type="submit" value="{$LANG.contactsend}" class="btn btn-primary" /></p>
-
+		<div class="text-center form-group">
+			<button type="submit" class="btn btn-primary">{$LANG.contactsend}</button>
+		</div>
+	</fieldset>
 </form>
-
-{/if}
-
-<br />
-<br />
-<br />

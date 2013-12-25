@@ -1,66 +1,75 @@
-{include file="$template/pageheader.tpl" title=$LANG.domainemailforwarding}
-
-<div class="alert alert-block alert-info">
-    <p>{$LANG.domainname}: <strong>{$domain}</strong</p>
+<div class="page-header">
+	<h1>{$LANG.domainemailforwarding} {$domain}</h1>
 </div>
+
+{if $error}
+<div class="alert alert-danger alert-dismissable">
+	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+	{$error}
+</div>
+{/if}
 
 <p>{$LANG.domainemailforwardingdesc}</p>
 
-<br />
-
-{if $error}
-<div class="alert alert-danger text-center">
-    {$error}
-</div>
-{/if}
-
 {if $external}
 
-<br /><br />
-<div class="text-center">
-{$code}
-</div>
-<br /><br /><br /><br />
+<div class="text-center">{$code}</div>
 
 {else}
 
-<form method="post" action="{$smarty.server.PHP_SELF}?action=domainemailforwarding">
-<input type="hidden" name="sub" value="save" />
-<input type="hidden" name="domainid" value="{$domainid}" />
+<form method="post" action="clientarea.php">
+	<input type="hidden" name="action" value="domainemailforwarding">
+	<input type="hidden" name="sub" value="save">
+	<input type="hidden" name="domainid" value="{$domainid}">
+	<table class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th>{$LANG.domainemailforwardingprefix}</th>
+				<th>{$LANG.domainemailforwardingforwardto}</th>
+			</tr>
+		</thead>
+		<tbody>
+		{foreach key=num item=emailforwarder from=$emailforwarders}
+			<tr>
+				<td>
+					<div class="input-group">
+						<input type="text" name="emailforwarderprefix[{$num}]" value="{$emailforwarder.prefix}" class="form-control">
+						<span class="input-group-addon">@{$domain}</span>
+					</div>
+				</td>
+				<td><input type="text" name="emailforwarderforwardto[{$num}]" value="{$emailforwarder.forwardto}" class="form-control"></td>
+			</tr>
+		{/foreach}
+			<tr>
+				<td>
+					<div class="input-group">
+						<input type="text" name="emailforwarderprefixnew" class="form-control">
+						<span class="input-group-addon">@{$domain}</span>
+					</div>
+				</td>
+				<td><input type="text" name="emailforwarderforwardtonew" class="form-control"></td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan="3" class="text-right">
+					<input type="submit" value="{$LANG.clientareasavechanges}" onclick="$('#modalpleasewait').modal();" class="btn btn-primary">
+				</td>
+			</tr>
+		</tfoot>
+	</table>
+</form>
 
-<div class="center80">
-<table class="table table-striped table-framed">
-    <thead>
-        <tr>
-            <th class="text-center">{$LANG.domainemailforwardingprefix}</th>
-            <th></th>
-            <th class="text-center">{$LANG.domainemailforwardingforwardto}</th>
-        </tr>
-    </thead>
-    <tbody>
-{foreach key=num item=emailforwarder from=$emailforwarders}
-        <tr>
-            <td class="text-center"><input type="text" name="emailforwarderprefix[{$num}]" value="{$emailforwarder.prefix}" size="15" /></td>
-            <td class="text-center">@{$domain} => </td>
-            <td class="text-center"><input type="text" name="emailforwarderforwardto[{$num}]" value="{$emailforwarder.forwardto}" size="35" /></td>
-        </tr>
-{/foreach}
-        <tr>
-            <td class="text-center"><input type="text" name="emailforwarderprefixnew" size="15" /></td>
-            <td class="text-center">@{$domain} => </td>
-            <td class="text-center"><input type="text" name="emailforwarderforwardtonew" size="35" /></td>
-        </tr>
-    </tbody>
-</table>
+<div class="modal fade" id="modalpleasewait">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header text-center">
+				<img src="images/loadingsml.gif" alt="{$LANG.pleasewait}" style="vertical-align:baseline;">
+				<span class="lead">{$LANG.pleasewait}</span>
+			</div>
+		</div>
+	</div>
 </div>
 
-<p align="center"><input type="submit" value="{$LANG.clientareasavechanges}" class="btn btn-primary" /></p>
-
-</form>
 
 {/if}
-
-<form method="post" action="{$smarty.server.PHP_SELF}?action=domaindetails">
-<input type="hidden" name="id" value="{$domainid}" />
-<p><input type="submit" value="{$LANG.clientareabacklink}" class="btn" /></p>
-</form>

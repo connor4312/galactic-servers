@@ -1,14 +1,17 @@
-{include file="$template/pageheader.tpl" title=$LANG.accessdenied}
+<div class="page-header">
+	<h1>{$LANG.accessdenied}</h1>
+</div>
 
 <p>{$LANG.downloadproductrequired}</p>
 
-<div class="alert alert-block alert-info">
-<p class="text-center"><strong>{if $pid}{$prodname}{else}{$addonname}{/if}</strong></p>
+<div class="alert alert-info">
+	{if $pid}{$prodname}{else}{$addonname}{/if}
 </div>
 
-{if $pid}<p class="text-center"><a href="cart.php?a=add&pid={$pid}">{$LANG.ordernowbutton} &raquo;</a></p>{/if}
-{if $aid}<p class="text-center"><a href="cart.php?gid=addons">{$LANG.ordernowbutton} &raquo;</a></p>{/if}
+{if $pid}
+<div class="form-group text-center"><a href="cart.php?a=add&pid={$pid}" class="btn btn-success btn-lg" title="{$LANG.ordernowbutton}">{$LANG.ordernowbutton} &raquo;</a></div>
+{/if}
 
-<br />
-<br />
-<br />
+{if $aid}
+<div class="form-group text-center"><a href="cart.php?gid=addons" class="btn btn-success btn-lg" title="{$LANG.ordernowbutton}">{$LANG.ordernowbutton} &raquo;</a></div>
+{/if}

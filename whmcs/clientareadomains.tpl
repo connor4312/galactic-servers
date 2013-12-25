@@ -1,99 +1,99 @@
-{include file="$template/pageheader.tpl" title=$LANG.clientareanavdomains desc=$LANG.clientareadomainsintro}
-
-<form method="post" action="clientarea.php?action=domains">
-    <div class="input-group col-md-4">
-        <input type="text" name="q" placeholder="Search" class="form-control appendedInputButton" />
-        <span class="input-group-btn">
-            <button type="submit" class="btn btn-info">{$LANG.searchfilter}</button>
-        </span>
-    </div>
-</form>
-<div class="clearfix"></div>
-
-<div class="resultsbox">
-<p>{$numitems} {$LANG.recordsfound}, {$LANG.page} {$pagenumber} {$LANG.pageof} {$totalpages}</p>
+<div class="page-header">
+	<h1>{$LANG.clientareanavdomains} <small>{$LANG.clientareadomainsintro}</small></h1>
 </div>
 
-<div class="clear"></div>
-{literal}
-<script>
-$(document).ready(function() {
-	$(".setbulkaction").click(function(event) {
-	  event.preventDefault();
-	  $("#bulkaction").val($(this).attr('id'));
-	  $("#bulkactionform").submit();
-	});
-});
-</script>
-{/literal}
-<form method="post" id="bulkactionform" action="clientarea.php?action=bulkdomain">
-<input id="bulkaction" name="update" type="hidden" />
+<div class="row">
+	<div class="col-md-7">
+		<div style="padding-top:20px">{$numitems} {$LANG.recordsfound}, {$LANG.page} {$pagenumber} {$LANG.pageof} {$totalpages}</div>
+	</div>
+	<div class="col-md-5">
+		<form class="form-inline well well-sm pull-right" action="clientarea.php" method="post">
+			<input type="hidden" name="action" value="products">
+			<div class="form-group">
+				<input type="text" class="form-control" name="q" value="{if $q}{$q}{/if}" placeholder="{$LANG.searchenterdomain}" style="min-width: 300px">
+			</div>
+			<button type="submit" class="btn btn-success">{$LANG.searchfilter}</button>
+		</form>
+	</div>
+</div>
 
-<table class="table table-striped table-framed">
-    <thead>
-        <tr>
-            <th class="text-center"><input type="checkbox" onclick="toggleCheckboxes('domids')" /></th>
-            <th{if $orderby eq "domain"} class="headerSort{$sort}"{/if}><a href="clientarea.php?action=domains{if $q}&q={$q}{/if}&orderby=domain">{$LANG.clientareahostingdomain}</a></th>
-            <th{if $orderby eq "regdate"} class="headerSort{$sort}"{/if}><a href="clientarea.php?action=domains{if $q}&q={$q}{/if}&orderby=regdate">{$LANG.clientareahostingregdate}</a></th>
-            <th{if $orderby eq "nextduedate"} class="headerSort{$sort}"{/if}><a href="clientarea.php?action=domains{if $q}&q={$q}{/if}&orderby=nextduedate">{$LANG.clientareahostingnextduedate}</a></th>
-            <th{if $orderby eq "status"} class="headerSort{$sort}"{/if}><a href="clientarea.php?action=domains{if $q}&q={$q}{/if}&orderby=status">{$LANG.clientareastatus}</a></th>
-            <th{if $orderby eq "autorenew"} class="headerSort{$sort}"{/if}><a href="clientarea.php?action=domains{if $q}&q={$q}{/if}&orderby=autorenew">{$LANG.domainsautorenew}</a></th>
-            <th>&nbsp;</th>
-        </tr>
-    </thead>
-    <tbody>
-{foreach key=num item=domain from=$domains}
-        <tr>
-            <td class="text-center"><input type="checkbox" name="domids[]" class="domids" value="{$domain.id}" /></td>
-            <td><a href="http://{$domain.domain}/" target="_blank">{$domain.domain}</a></td>
-            <td>{$domain.registrationdate}</td>
-            <td>{$domain.nextduedate}</td>
-            <td><span class="label {$domain.rawstatus}">{$domain.statustext}</span></td>
-            <td>{if $domain.autorenew}{$LANG.domainsautorenewenabled}{else}{$LANG.domainsautorenewdisabled}{/if}</td>
-            <td>
-                <div class="btn-group">
-                <a class="btn" href="clientarea.php?action=domaindetails&id={$domain.id}"> <i class="icon-wrench"></i> {$LANG.managedomain}</a>
-                {if $domain.rawstatus == "active"}
-                <a class="btn dropdown-toggle" href="#" data-toggle="dropdown"><span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <li><a href="clientarea.php?action=domaindetails&id={$domain.id}#tab3"><i class="icon-globe"></i> {$LANG.domainmanagens}</a></li>
-                    <li><a href="clientarea.php?action=domaincontacts&domainid={$domain.id}"><i class="icon-user"></i> {$LANG.domaincontactinfoedit}</a></li>
-                    <li><a href="clientarea.php?action=domaindetails&id={$domain.id}#tab2"><i class="icon-globe"></i> {$LANG.domainautorenewstatus}</a></li>
-                    <li class="divider"></li>
-                    <li><a href="clientarea.php?action=domaindetails&id={$domain.id}"><i class="icon-pencil"></i> {$LANG.managedomain}</a></li>
-                </ul>
-                {/if}
-                </div>
-            </td>
-        </tr>
-{foreachelse}
-        <tr>
-            <td colspan="7" class="text-center">{$LANG.norecordsfound}</td>
-        </tr>
-{/foreach}
-    </tbody>
-</table>
-
-<div class="btn-group">
-<a class="btn btn-inverse" href="#" data-toggle="dropdown"><i class="icon-folder-open icon-white"></i> {$LANG.withselected}</a>
-<a class="btn btn-inverse dropdown-toggle" href="#" data-toggle="dropdown"><span class="caret"></span></a>
-<ul class="dropdown-menu">
-    <li><a href="#" id="nameservers" class="setbulkaction"><i class="icon-globe"></i> {$LANG.domainmanagens}</a></li>
-    <li><a href="#" id="autorenew" class="setbulkaction"><i class="icon-refresh"></i> {$LANG.domainautorenewstatus}</a></li>
-    <li><a href="#" id="reglock" class="setbulkaction"><i class="icon-lock"></i> {$LANG.domainreglockstatus}</a></li>
-    <li><a href="#" id="contactinfo" class="setbulkaction"><i class="icon-user"></i> {$LANG.domaincontactinfoedit}</a></li>
-    <li><a href="#" id="renew" class="setbulkaction"><i class="icon-repeat"></i> {$LANG.domainmassrenew}</a></li>
-</ul>
-</div></form>
-
-{include file="$template/clientarearecordslimit.tpl" clientareaaction=$clientareaaction}
-
-<ul class="pager">
-    <li class="prev{if !$prevpage} disabled{/if}"><a href="{if $prevpage}clientarea.php?action=domains{if $q}&q={$q}{/if}&amp;page={$prevpage}{else}javascript:return false;{/if}">&larr; {$LANG.previouspage}</a></li>
-    <li class="next{if !$nextpage} disabled{/if}"><a href="{if $nextpage}clientarea.php?action=domains{if $q}&q={$q}{/if}&amp;page={$nextpage}{else}javascript:return false;{/if}">{$LANG.nextpage} &rarr;</a></li>
-</ul>
-
+<form method="post" action="clientarea.php">
+	<input type="hidden" name="action" value="bulkdomain">
+	<div class="panel panel-default">
+		<table class="table table-striped table-sorted">
+			<thead>
+				<tr>
+					<th class="text-center"><input type="checkbox" class="toggle-checkboxes" data-target=".domids"></th>
+					<th{if $orderby eq "domain"} class="sort-{$sort}"{/if}><a href="clientarea.php?action=domains{if $q}&amp;q={$q}{/if}&amp;orderby=domain" title="{$LANG.clientareahostingdomain}">{$LANG.clientareahostingdomain}</a></th>
+					<th{if $orderby eq "regdate"} class="sort-{$sort}"{/if}><a href="clientarea.php?action=domains{if $q}&amp;q={$q}{/if}&amp;orderby=regdate" title="{$LANG.clientareahostingregdate}">{$LANG.clientareahostingregdate}</a></th>
+					<th{if $orderby eq "nextduedate"} class="sort-{$sort}"{/if}><a href="clientarea.php?action=domains{if $q}&amp;q={$q}{/if}&amp;orderby=nextduedate" title="{$LANG.clientareahostingnextduedate}">{$LANG.clientareahostingnextduedate}</a></th>
+					<th{if $orderby eq "status"} class="sort-{$sort}"{/if}><a href="clientarea.php?action=domains{if $q}&amp;q={$q}{/if}&amp;orderby=status" title="{$LANG.clientareastatus}">{$LANG.clientareastatus}</a></th>
+					<th{if $orderby eq "autorenew"} class="sort-{$sort}"{/if}><a href="clientarea.php?action=domains{if $q}&amp;q={$q}{/if}&amp;orderby=autorenew" title="{$LANG.domainsautorenew}">{$LANG.domainsautorenew}</a></th>
+					<th>&nbsp;</th>
+				</tr>
+			</thead>
+			<tbody>
+				{foreach key=num item=domain from=$domains}
+				<tr>
+					<td class="text-center"><input type="checkbox" name="domids[]" class="domids" value="{$domain.id}"></td>
+					<td><a href="http://{$domain.domain}/" target="_blank">{$domain.domain}</a></td>
+					<td>{$domain.registrationdate}</td>
+					<td>{$domain.nextduedate}</td>
+					<td><span class="label label-{$domain.rawstatus}">{$domain.statustext}</span></td>
+					<td>{if $domain.autorenew}{$LANG.domainsautorenewenabled}{else}{$LANG.domainsautorenewdisabled}{/if}</td>
+					<td><a href="clientarea.php?action=domaindetails&amp;id={$domain.id}" class="btn btn-primary" title="{$LANG.managedomain}">{$LANG.managedomain}</a></td>
+				</tr>
+				{foreachelse}
+				<tr>
+					<td colspan="7" class="text-center">{$LANG.norecordsfound}</td>
+				</tr>
+				{/foreach}
+			</tbody>
+			<tfoot id="bulkmanagementactions" style="display:none;">
+				<tr>
+					<td colspan="7">
+						{$LANG.domainbulkmanagement}:
+						<input type="submit" name="nameservers" value="{$LANG.domainmanagens}" class="btn btn-primary btn-sm">
+						<input type="submit" name="autorenew" value="{$LANG.domainautorenewstatus}" class="btn btn-primary btn-sm">
+						<input type="submit" name="reglock" value="{$LANG.domainreglockstatus}" class="btn btn-primary btn-sm">
+						<input type="submit" name="contactinfo" value="{$LANG.domaincontactinfoedit}" class="btn btn-primary btn-sm">
+						<input type="submit" name="renew" value="{$LANG.domainmassrenew}" class="btn btn-primary btn-sm">
+					</td>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
 </form>
 
-<br />
-<br />
+<form method="post" action="{$smarty.server.PHP_SELF}" class="pull-right">
+	<fieldset>
+		<input type="hidden" name="action" value="{$clientareaaction}"> 
+		<select name="itemlimit" onchange="submit()" class="form-control" style="margin-top: 18px;">
+			<option>{$LANG.resultsperpage}</option>
+			<option value="10"{if $itemlimit==10} selected="selected"{/if}>10</option>
+			<option value="25"{if $itemlimit==25} selected="selected"{/if}>25</option>
+			<option value="50"{if $itemlimit==50} selected="selected"{/if}>50</option>
+			<option value="100"{if $itemlimit==100} selected="selected"{/if}>100</option>
+			<option value="all"{if $itemlimit==99999999} selected="selected"{/if}>{$LANG.clientareaunlimited}</option>
+		</select>
+	</fieldset>
+</form>
+
+<ul class="pagination">
+	<li{if !$prevpage} class="disabled"{/if}><a href="{if $prevpage}clientarea.php?action=domains{if $q}&amp;q={$q}{/if}&amp;page={$prevpage}{else}javascript:return false;{/if}">&larr; {$LANG.previouspage}</a></li>
+	<li{if !$nextpage} class="disabled"{/if}><a href="{if $nextpage}clientarea.php?action=domains{if $q}&amp;q={$q}{/if}&amp;page={$nextpage}{else}javascript:return false;{/if}">{$LANG.nextpage} &rarr;</a></li>
+</ul>
+
+{literal}
+<script type="text/javascript">
+	$(function() {
+		$('.domids').change(function() {
+			if($('.domids').filter( ":checked" ).length > 0) {
+				$('#bulkmanagementactions').fadeIn();
+			} else {
+				$('#bulkmanagementactions').fadeOut();
+			}
+		});
+	});
+</script>
+{/literal}

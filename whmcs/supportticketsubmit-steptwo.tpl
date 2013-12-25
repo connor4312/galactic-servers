@@ -1,149 +1,145 @@
-{include file="$template/pageheader.tpl" title=$LANG.navopenticket}
-
-<script language="javascript">
-var currentcheckcontent,lastcheckcontent;
-{if $kbsuggestions}
-{literal}
-function getticketsuggestions() {
-    currentcheckcontent = jQuery("#message").val();
-    if (currentcheckcontent!=lastcheckcontent && currentcheckcontent!="") {
-        jQuery.post("submitticket.php", { action: "getkbarticles", text: currentcheckcontent },
-        function(data){
-            if (data) {
-                jQuery("#searchresults").html(data);
-                jQuery("#searchresults").slideDown();
-            }
-        });
-        lastcheckcontent = currentcheckcontent;
-	}
-    setTimeout('getticketsuggestions();', 3000);
-}
-getticketsuggestions();
-{/literal}
-{/if}
-</script>
+<div class="page-header">
+	<h1>{$LANG.navopenticket}</h1>
+</div>
 
 {if $errormessage}
-<div class="alert alert-danger">
-    <p class="bold">{$LANG.clientareaerrors}</p>
-    <ul>
-        {$errormessage}
-    </ul>
+<div class="alert alert-danger alert-dismissable">
+	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+	<h4 class="alert-header">{$LANG.clientareaerrors}</h4>
+	<ul>
+		{$errormessage}
+	</ul>
 </div>
 {/if}
 
-<br />
-<div class="alert alert-info"><b>Did you know</b> you can also call! UK number: <b>02895 813535</b>. UUS Number (Phoenix): <b>(602) 910-5858</b>.</div>
-<form name="submitticket" method="post" action="{$smarty.server.PHP_SELF}?step=3" enctype="multipart/form-data" class="center95 form-stacked">
-	    <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-        		    <label class="control-label bold" for="name">{$LANG.supportticketsclientname}</label>
-        			<div class="controls">
-        			    {if $loggedin}<input class="form-control disabled" type="text" id="name" value="{$clientname}" disabled="disabled" />{else}<input class="form-control" type="text" name="name" id="name" value="{$name}" />{/if}
-        			</div>
-        		</div>
-        	</div>
-            <div class="col-md-6">
-                <div class="form-group">
-        		    <label class="control-label bold" for="email">{$LANG.supportticketsclientemail}</label>
-        			<div class="controls">
-        			    {if $loggedin}<input class="form-control disabled" type="text" id="email" value="{$email}" disabled="disabled" />{else}<input class="form-control" type="text" name="email" id="email" value="{$email}" />{/if}
-        			</div>
-        		</div>
-        	</div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-        	    <div class="form-group">
-        		    <label class="control-label bold" for="subject">{$LANG.supportticketsticketsubject}</label>
-        			<div class="controls">
-        			    <input class="form-control" type="text" name="subject" id="subject" value="{$subject}" style="width:80%;" />
-        			</div>
-        		</div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group">
-        		    <label class="control-label bold" for="name">{$LANG.supportticketsdepartment}</label>
-        			<div class="controls">
-        			    <select class="form-control" name="deptid">
-                        {foreach from=$departments item=department}
-                            <option value="{$department.id}"{if $department.id eq $deptid} selected="selected"{/if}>{$department.name}</option>
-                        {/foreach}
-                        </select>
-        			</div>
-        		</div>
-    		</div>
-{if $relatedservices}
-    	     <div class="col-md-4">
-                 <div class="form-group">
-        		    <label class="control-label bold" for="relatedservice">{$LANG.relatedservice}</label>
-        			<div class="controls">
-        			    <select class="form-control" name="relatedservice" id="relatedservice">
-                            <option value="">{$LANG.none}</option>
-                            {foreach from=$relatedservices item=relatedservice}
-                            <option value="{$relatedservice.id}">{$relatedservice.name} ({$relatedservice.status})</option>
-                            {/foreach}
-                        </select>
-        			</div>
-        		</div>
-    		</div>
-{/if}
-            <div class="col-md-4">
-        	    <div class="form-group">
-        		    <label class="control-label bold" for="priority">{$LANG.supportticketspriority}</label>
-        			<div class="controls">
-        			    <select class="form-control" name="urgency" id="priority">
-                            <option value="High"{if $urgency eq "High"} selected="selected"{/if}>{$LANG.supportticketsticketurgencyhigh}</option>
-                            <option value="Medium"{if $urgency eq "Medium" || !$urgency} selected="selected"{/if}>{$LANG.supportticketsticketurgencymedium}</option>
-                            <option value="Low"{if $urgency eq "Low"} selected="selected"{/if}>{$LANG.supportticketsticketurgencylow}</option>
-                        </select>
-        			</div>
-        		</div>
-    		</div>
-        </div>
-
-	    <div class="form-group">
-		    <label class="control-label bold" for="message">{$LANG.contactmessage}</label>
-			<div class="controls">
-			    <textarea name="message" id="message" rows="12" class="fullwidth form-control">{$message}</textarea>
-			</div>
+<form name="submitticket" method="post" action="{$smarty.server.PHP_SELF}" enctype="multipart/form-data">
+	<input type="hidden" name="step" value="3">
+	<div class="row form-group">
+		<div class="col-md-4">
+			<label for="name">{$LANG.supportticketsclientname}</label>
+			{if $loggedin}
+			<input class="form-control disabled" type="text" id="name" value="{$clientname}" disabled="disabled">
+			{else}
+			<input class="form-control" type="text" name="name" id="name" value="{$name}">
+			{/if}
 		</div>
-{foreach key=num item=customfield from=$customfields}
-	    <div class="form-group">
-		    <label class="control-label bold" for="customfield{$customfield.id}">{$customfield.name}</label>
-			<div class="controls">
-			    {$customfield.input} {$customfield.description}
-			</div>
+		<div class="col-md-4">
+			<label for="email">{$LANG.supportticketsclientemail}</label>
+			{if $loggedin}
+			<input class="form-control disabled" type="text" id="email" value="{$email}" disabled="disabled">
+			{else}
+			<input class="form-control" type="text" name="email" id="email" value="{$email}">
+			{/if}
 		</div>
-{/foreach}
-	    <div class="form-group">
-		    <label class="control-label bold" for="attachments">{$LANG.supportticketsticketattachments}:</label>
-			<div class="controls">
-			    <input type="file" name="attachments[]" style="width:70%;" /><br />
-                <div id="fileuploads"></div>
-                <a href="#" onclick="extraTicketAttachment();return false"><img src="images/add.gif" align="absmiddle" border="0" /> {$LANG.addmore}</a><br />
-                ({$LANG.supportticketsallowedextensions}: {$allowedfiletypes})
-			</div>
+	</div>
+	<div class="form-group">
+		<label for="subject">{$LANG.supportticketsticketsubject}</label>
+		<input class="form-control" type="text" name="subject" id="subject" value="{$subject}">
+	</div>
+	<div class="row form-group">
+		<div class="col-md-3">
+			<label for="name">{$LANG.supportticketsdepartment}</label>
+			<select name="deptid" class="form-control">
+				{foreach from=$departments item=department}
+				<option value="{$department.id}"{if $department.id eq $deptid} selected="selected"{/if}>{$department.name}</option>
+				{/foreach}
+			</select>
 		</div>
+		<div class="col-md-3">
+			<label for="priority">{$LANG.supportticketspriority}</label>
+			<select name="urgency" id="priority" class="form-control">
+				<option value="High"{if $urgency eq "High"} selected="selected"{/if}>{$LANG.supportticketsticketurgencyhigh}</option>
+				<option value="Medium"{if $urgency eq "Medium" || !$urgency} selected="selected"{/if}>{$LANG.supportticketsticketurgencymedium}</option>
+				<option value="Low"{if $urgency eq "Low"} selected="selected"{/if}>{$LANG.supportticketsticketurgencylow}</option>
+			</select>
+		</div>
+		{if $relatedservices}
+		<div class="col-md-6">
+			<label for="relatedservice">{$LANG.relatedservice}</label>
+			<select name="relatedservice" id="relatedservice" class="form-control">
+				<option value="">{$LANG.none}</option>
+				{foreach from=$relatedservices item=relatedservice}
+				<option value="{$relatedservice.id}">{$relatedservice.name} ({$relatedservice.status})</option>
+				{/foreach}
+			</select>
+		</div>
+		{/if}
+	</div>
+	<div class="form-group">
+		<label for="message">{$LANG.contactmessage}</label>
+		<textarea name="message" id="message" rows="12" class="form-control">{$message}</textarea>
+	</div>
+	{foreach key=num item=customfield from=$customfields}
+	<div class="form-group">
+		<label for="customfield{$customfield.id}">{$customfield.name}</label>
+		{$customfield.input} {$customfield.description}
+	</div>
+	{/foreach}
+	<div id="attachements">
+		<h4>Attachements</h4>
+		<div class="form-group">
+			<input type="file" name="attachments[]">
+		</div>
+	</div>
+	<script type="text/javascript">
+	{literal}
+	function extraAttachment() { $("#attachements").append('<div class="form-group"><input type="file" name="attachments[]"></div>');}
+	{/literal}
+	</script>
+	<a href="javascript:void(0)" onclick="extraAttachment();"><img src="images/add.gif" alt="add icon"> {$LANG.addmore}</a>
+	({$LANG.supportticketsallowedextensions}: {$allowedfiletypes})
 
-    </fieldset>
+	<div id="searchresults" style="display:none;"></div>
 
-<div id="searchresults" class="contentbox" style="display:none;"></div>
+	{if $capatacha}
+	<h4>{$LANG.captchatitle}</h4>
+	<p>{$LANG.captchaverify}</p>
+	{if $capatacha eq "recaptcha"}
+	{$recapatchahtml}
+	{else}
+	<fieldset class="form-inline form-group">
+		<div class="form-group">
+			<input type="text" name="code" class="form-control" maxlength="5">
+		</div>
+		<img src="includes/verifyimage.php" alt="captcha">
+	</fieldset>
+	{/if}
+	{/if}
 
-{if $capatacha}
-<h3>{$LANG.captchatitle}</h3>
-<p>{$LANG.captchaverify}</p>
-{if $capatacha eq "recaptcha"}
-<div align="center">{$recapatchahtml}</div>
-{else}
-<p align="center"><img src="includes/verifyimage.php" align="middle" /> <input type="text" name="code" class="input-small" maxlength="5" /></p>
-{/if}
-{/if}
-
-<div class="form-actions" style="padding-left:160px;">
-    <input class="btn btn-primary" type="submit" name="save" value="{$LANG.supportticketsticketsubmit}" />
-    <input class="btn" type="reset" value="{$LANG.cancel}" />
-</div>
+	<div class="form-group">
+		<input class="btn btn-primary" type="submit" name="save" value="{$LANG.supportticketsticketsubmit}" onclick="$('#modalpleasewait').modal();">
+		<button class="btn btn-default" type="reset">{$LANG.cancel}</button>
+	</div>
 
 </form>
+
+<div class="modal hide fade in" id="modalpleasewait">
+	<div class="modal-header text-center">
+		<img src="images/loadingsml.gif" style="vertical-align:baseline">
+		<span class="lead">{$LANG.pleasewait}</span>
+	</div>
+</div>
+
+{if $kbsuggestions}
+<script type="text/javascript">
+{literal}
+	var currentcheckcontent, lastcheckcontent;
+	setTimeout(function() {
+		currentcheckcontent = $("#message").val();
+		if (currentcheckcontent!=lastcheckcontent && currentcheckcontent!="") {
+			$.post(
+				"submitticket.php",
+				{ action: "getkbarticles", text: currentcheckcontent },
+				function(data){
+					if (data) {
+						$("#searchresults").html(data);
+						$("#searchresults").slideDown();
+					}
+				}
+			);
+			lastcheckcontent = currentcheckcontent;
+		}
+	}, 3000);
+{/literal}
+</script>
+{/if}

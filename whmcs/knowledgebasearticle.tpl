@@ -1,53 +1,53 @@
-{include file="$template/pageheader.tpl" title=$LANG.knowledgebasetitle}
+<p class="breadcrumb">{$breadcrumbnav}</p>
 
-<script language="javascript">
-function addBookmark() {ldelim}
-    if (window.sidebar) {ldelim}
-        window.sidebar.addPanel('{$companyname} - {$kbarticle.title}', location.href,"");
-    {rdelim} else if( document.all ) {ldelim}
-        window.external.AddFavorite( location.href, '{$companyname} - {$kbarticle.title}');
-    {rdelim} else if( window.opera && window.print ) {ldelim}
-        return true;
-    {rdelim}
-{rdelim}
+<div class="pull-right">
+	<img src="images/addtofavouritesicon.gif" style="vertical-align:baseline" alt="{$LANG.knowledgebasefavorites}"> <a href="#" onClick="addBookmark();return false">{$LANG.knowledgebasefavorites}</a> &nbsp;&nbsp; <img src="images/print.gif" style="vertical-align:baseline" alt="{$LANG.knowledgebaseprint}"> <a href="#" onclick="window.print();return false">{$LANG.knowledgebaseprint}</a>
+</div>
+
+<div class="page-header">
+	<h1>{$LANG.knowledgebasetitle}</h1>
+</div>
+
+{literal}
+<script type="text/javascript">
+function addBookmark() {
+	if (window.sidebar) {
+		window.sidebar.addPanel('{/literal}{$companyname} - {$kbarticle.title}{literal}', location.href,"");
+	} else if( document.all ) {
+		window.external.AddFavorite( location.href, {/literal}'{$companyname} - {$kbarticle.title}'{literal});
+	} else if( window.opera && window.print ) {
+		return true;
+	}
+}
 </script>
+{/literal}
 
-<p>{$breadcrumbnav}</p>
+<h2 class="text-center">{$kbarticle.title}</h2>
 
-<br />
+<div>
+	{$kbarticle.text}
+</div>
 
-<h2>{$kbarticle.title}</h2>
-
-<br />
-
-<blockquote>
-<br /><br />
-{$kbarticle.text}
-<br /><br />
-</blockquote>
-
-<form method="post" action="knowledgebase.php?action=displayarticle&amp;id={$kbarticle.id}&amp;useful=vote">
-<p>
-{if $kbarticle.voted}
-<strong>{$LANG.knowledgebaserating}</strong> {$kbarticle.useful} {$LANG.knowledgebaseratingtext} ({$kbarticle.votes} {$LANG.knowledgebasevotes})
-{else}
-<strong>{$LANG.knowledgebasehelpful}</strong> <select name="vote"><option value="yes">{$LANG.knowledgebaseyes}</option><option value="no">{$LANG.knowledgebaseno}</option></select> <input type="submit" value="{$LANG.knowledgebasevote}" class="btn" />
-{/if}
-</p>
+<form method="post" action="knowledgebase.php?action=displayarticle&amp;id={$kbarticle.id}&amp;useful=vote" class="well form-horizontal text-center">
+	{if $kbarticle.voted}
+		<strong>{$LANG.knowledgebaserating}</strong> {$kbarticle.useful} {$LANG.knowledgebaseratingtext} ({$kbarticle.votes} {$LANG.knowledgebasevotes})
+	{else}
+		<strong>{$LANG.knowledgebasehelpful}</strong> 
+		<select name="vote">
+			<option value="yes">{$LANG.knowledgebaseyes}</option>
+			<option value="no">{$LANG.knowledgebaseno}</option>
+		</select>
+		<input type="submit" value="{$LANG.knowledgebasevote}" class="btn btn-primary">
+	{/if}
 </form>
 
-<p><img src="images/addtofavouritesicon.gif" align="absmiddle" alt="{$LANG.knowledgebasefavorites}" /> <a href="#" onClick="addBookmark();return false">{$LANG.knowledgebasefavorites}</a> &nbsp;&nbsp; <img src="images/print.gif" align="absmiddle" alt="{$LANG.knowledgebaseprint}" /> <a href="#" onclick="window.print();return false">{$LANG.knowledgebaseprint}</a></p>
-
 {if $kbarticles}
-
-<div class="kbalsoread">{$LANG.knowledgebasealsoread}</div>
-
+<h3>{$LANG.knowledgebasealsoread}</h3>
+<ul class="list-unstyled">
 {foreach key=num item=kbarticle from=$kbarticles}
-<div class="kbarticle">
-<img src="images/article.gif" align="middle" alt="" /> <strong><a href="{if $seofriendlyurls}knowledgebase/{$kbarticle.id}/{$kbarticle.urlfriendlytitle}.html{else}knowledgebase.php?action=displayarticle&amp;id={$kbarticle.id}{/if}">{$kbarticle.title}</a></strong> <span class="kbviews">({$LANG.knowledgebaseviews}: {$kbarticle.views})</span>
-</div>
+	<li>
+		<h4><img src="images/article.gif" alt="Article Icon"> <a href="{if $seofriendlyurls}knowledgebase/{$kbarticle.id}/{$kbarticle.urlfriendlytitle}.html{else}knowledgebase.php?action=displayarticle&amp;id={$kbarticle.id}{/if}">{$kbarticle.title}</a> <small>({$LANG.knowledgebaseviews}: {$kbarticle.views})</small></h4>
+	</li>
 {/foreach}
-
+</ul>
 {/if}
-
-<br />

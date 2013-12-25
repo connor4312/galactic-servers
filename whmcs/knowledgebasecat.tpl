@@ -1,51 +1,51 @@
-{include file="$template/pageheader.tpl" title=$LANG.knowledgebasetitle}
-
-<p>{$breadcrumbnav}</p>
-
-<br />
-
-<div class="well">
-    <div class="text-center">
-        <form method="post" action="knowledgebase.php?action=search" class="form-inline">
-        {if $catid}<input type="hidden" name="catid" value="{$catid}" />{/if}
-            <fieldset class="form-group">
-        	    <input class="bigfield" name="search" type="text" value="{if $searchterm}{$searchterm}{else}{$LANG.kbquestionsearchere}{/if}" onfocus="this.value=(this.value=='{$LANG.kbquestionsearchere}') ? '' : this.value;" onblur="this.value=(this.value=='') ? '{$LANG.kbquestionsearchere}' : this.value;"/>
-                <input type="submit" class="btn btn-large btn-primary" value="{$LANG.knowledgebasesearch}" />
-        	</fieldset>
-        </form>
-    </div>
+<div class="page-header">
+	<h1>{$LANG.knowledgebasetitle}</h1>
 </div>
+
+<p class="breadcrumb">{$breadcrumbnav}</p>
+
+<form method="post" action="knowledgebase.php?action=search" class="well">
+	{if $catid}<input type="hidden" name="catid" value="{$catid}" />{/if}
+	<div class="row">
+		<div class="col-md-10">
+			<input class="form-control input-lg" name="search" type="text" value="" placeholder="{$LANG.kbquestionsearchere}">
+		</div>
+		<div class="col-md-2">
+			<input type="submit" class="btn btn-lg btn-primary" value="{$LANG.knowledgebasesearch}">
+		</div>
+	</div>
+</form>
 
 {if $kbcats}
-{include file="$template/subheader.tpl" title=$LANG.knowledgebasecategories}
-
-<div class="form-group">
-{foreach name=kbasecats from=$kbcats item=kbcat}
-    <div class="col4">
-        <div class="internalpadding">
-            <img src="images/folder.gif" /> <a href="{if $seofriendlyurls}knowledgebase/{$kbcat.id}/{$kbcat.urlfriendlyname}{else}knowledgebase.php?action=displaycat&amp;catid={$kbcat.id}{/if}" class="fontsize2"><strong>{$kbcat.name}</strong></a> ({$kbcat.numarticles})<br />
-            {$kbcat.description}
-        </div>
-    </div>
-	{if ($smarty.foreach.kbasecats.index+1) is div by 4}<div class="clear"></div>
-    {/if}
-{/foreach}
+<div class="page-header">
+	<h2>{$LANG.knowledgebasecategories}</h2>
 </div>
-<div class="clear"></div>
-{/if}{if $kbarticles}
-{include file="$template/subheader.tpl" title=$LANG.knowledgebasearticles}
 
-{foreach from=$kbarticles item=kbarticle}
-<div class="row">
-    <img src="images/article.gif"> <a href="{if $seofriendlyurls}knowledgebase/{$kbarticle.id}/{$kbarticle.urlfriendlytitle}.html{else}knowledgebase.php?action=displayarticle&amp;id={$kbarticle.id}{/if}" class="fontsize2"><strong>{$kbarticle.title}</strong></a><br />
-    {$kbarticle.article|truncate:100:"..."}
+<div class="clearfix">
+	<ul class="list-unstyled list-inline">
+		{foreach from=$kbcats item=kbcat}
+		<li class="col-md-3">
+			<h4><img src="images/folder.gif" style="vertical-align:baseline" alt="folder icon"> <a href="{if $seofriendlyurls}knowledgebase/{$kbcat.id}/{$kbcat.urlfriendlyname}{else}knowledgebase.php?action=displaycat&amp;catid={$kbcat.id}{/if}">{$kbcat.name}</a></h4>
+			<p>{$kbcat.description}</p>
+		</li>
+		{/foreach}
+	</ul>
 </div>
-{foreachelse}
-<br />
-<p class="fontsize3 text-center">{$LANG.knowledgebasenoarticles}</p>
-<br /><br /><br />
-{/foreach}
 {/if}
-<div class="clear"></div>
 
-<br />
+<div class="page-header">
+   <h2>{$LANG.knowledgebasearticles}</h2>
+</div>
+
+<ul class="list-unstyled">
+	{foreach from=$kbarticles item=kbarticle}
+   <li>
+      <h4><img src="images/article.gif" style="vertical-align:baseline" alt="article icon"> <a href="{if $seofriendlyurls}knowledgebase/{$kbarticle.id}/{$kbarticle.urlfriendlytitle}.html{else}knowledgebase.php?action=displayarticle&amp;id={$kbarticle.id}{/if}">{$kbarticle.title}</a></h4>
+      {$kbarticle.article|truncate:150:"..."}
+   </li>
+	{foreachelse}
+	<li>
+		<p class="text-center">{$LANG.knowledgebasenoarticles}</p>
+	</li>
+	{/foreach}
+</ul>

@@ -1,208 +1,177 @@
 {if $error}
-
-<p>{$LANG.supportticketinvalid}</p>
-
+<div class="alert alert-danger">{$LANG.supportticketinvalid}</div>
 {else}
-
-{include file="$template/pageheader.tpl" title=$LANG.supportticketsviewticket|cat:' #'|cat:$tid}
+<div class="page-header">
+	<h1>{$LANG.supportticketsviewticket} #{$tid}</h1>
+</div>
 
 {if $errormessage}
-<div class="alert alert-danger">
-    <p class="bold">{$LANG.clientareaerrors}</p>
-    <ul>
-        {$errormessage}
-    </ul>
+<div class="alert alert-danger alert-dismissable">
+	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+	<h4 class="alert-heading">{$LANG.clientareaerrors}</h4>
+	<ul>
+		{$errormessage}
+	</ul>
 </div>
 {/if}
 
 <h2>{$subject}</h2>
 
-<div class="ticketdetailscontainer row">
-    <div class="col-md-3">
-        <div class="internalpadding">
-            {$LANG.supportticketsubmitted}
-            <div class="detail">{$date}</div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="internalpadding">
-            {$LANG.supportticketsdepartment}
-            <div class="detail">{$department}</div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="internalpadding">
-            {$LANG.supportticketspriority}
-            <div class="detail">{$urgency}</div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="internalpadding">
-            {$LANG.supportticketsstatus}
-            <div class="detail">{$status}</div>
-        </div>
-    </div>
-    <div class="clear"></div>
+<div class="row text-center">
+	<div class="col-md-3">
+		<div class="well well-sm">
+			<span class="lead">{$LANG.supportticketsubmitted}</span>
+			<div>{$date}</div>
+		</div>
+	</div>
+	<div class="col-md-3">
+		<div class="well well-sm">
+			<span class="lead">{$LANG.supportticketsdepartment}</span>
+			<div>{$department}</div>
+		</div>
+	</div>
+	<div class="col-md-3">
+		<div class="well well-sm">
+			<span class="lead">{$LANG.supportticketspriority}</span>
+			<div>{$urgency}</div>
+		</div>
+	</div>
+	<div class="col-md-3">
+		<div class="well well-sm">
+			<span class="lead">{$LANG.supportticketsstatus}</span>
+			<div>{$status}</div>
+		</div>
+	</div>
 </div>
 
-{if $customfields}
-<table class="table table-framed">
-{foreach from=$customfields item=customfield}
-<tr><td>{$customfield.name}:</td><td>{$customfield.value}</td></tr>
-{/foreach}
-</table>
-{/if}
+<div class="margin-bottom">
+	<a href="supporttickets.php" class="btn btn-default" title="{$LANG.clientareabacklink}">{$LANG.clientareabacklink}</a> 
+	<button type="button" class="btn btn-primary" onclick="$('#replycontainer').slideToggle().removeClass('hide');">{$LANG.supportticketsreply}</button> 
+	{if $showclosebutton}<a href="{$smarty.server.PHP_SELF}?tid={$tid}&amp;c={$c}&amp;closeticket=true" class="btn btn-danger" title="{$LANG.supportticketsclose}">{$LANG.supportticketsclose}</a>{/if}
+</div>
 
-<p><input type="button" value="{$LANG.clientareabacklink}" class="btn" onclick="window.location='supporttickets.php'" /> <input type="button" value="{$LANG.supportticketsreply}" class="btn btn-primary" onclick="jQuery('#replycont').slideToggle()" />{if $showclosebutton} <input type="button" value="{$LANG.supportticketsclose}" class="btn btn-danger" onclick="window.location='{$smarty.server.PHP_SELF}?tid={$tid}&amp;c={$c}&amp;closeticket=true'" />{/if}</p>
-
-<div id="replycont" class="ticketreplybox{if !$smarty.get.postreply} hide{/if}">
-<form method="post" action="{$smarty.server.PHP_SELF}?tid={$tid}&amp;c={$c}&amp;postreply=true" enctype="multipart/form-data" class="form-stacked">
-
-    <fieldset class="form-group">
-
-	    <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-        		    <label class="control-label bold" for="name">{$LANG.supportticketsclientname}</label>
-        			<div class="controls">
-        			    {if $loggedin}<input class="form-control disabled" type="text" id="name" value="{$clientname}" disabled="disabled" />{else}<input class="form-control" type="text" name="replyname" id="name" value="{$replyname}" />{/if}
-        			</div>
-        		</div>
-        	</div>
-            <div class="col-md-6">
-                <div class="form-group">
-        		    <label class="control-label bold" for="email">{$LANG.supportticketsclientemail}</label>
-        			<div class="controls">
-        			    {if $loggedin}<input class="form-control disabled" type="text" id="email" value="{$email}" disabled="disabled" />{else}<input class="form-control" type="text" name="replyemail" id="email" value="{$replyemail}" />{/if}
-        			</div>
-        		</div>
-        	</div>
-        </div>
-
-	    <div class="form-group">
-		    <label class="control-label bold" for="message">{$LANG.contactmessage}</label>
-			<div class="controls">
-			    <textarea name="replymessage" id="message" rows="12" class="fullwidth">{$replymessage}</textarea>
+<form method="post" action="{$smarty.server.PHP_SELF}" enctype="multipart/form-data" id="replycontainer" class="panel panel-default{if !$smarty.get.postreply} hide{/if}">
+	<input type="hidden" name="tid" value="{$tid}">
+	<input type="hidden" name="c" value="{$c}">
+	<input type="hidden" name="postreply" value="true">
+	<div class="panel-body">
+		<div class="row form-group">
+			<div class="col-md-4">
+				<label for="name">{$LANG.supportticketsclientname}</label>
+				{if $loggedin}
+				<input class="disabled form-control" type="text" id="name" value="{$clientname}" disabled="disabled">
+				{else}
+				<input class="form-control" type="text" name="replyname" id="name" value="{$replyname}">
+				{/if}
+			</div>
+			<div class="col-md-4">
+				<label for="email">{$LANG.supportticketsclientemail}</label>
+				{if $loggedin}
+				<input class="form-control disabled" type="text" id="email" value="{$email}" disabled="disabled">
+				{else}
+				<input class="form-control" type="text" name="replyemail" id="email" value="{$replyemail}">
+				{/if}
 			</div>
 		</div>
-
-	    <div class="form-group">
-		    <label class="control-label bold" for="attachments">{$LANG.supportticketsticketattachments}:</label>
-			<div class="controls">
-			    <input type="file" name="attachments[]" style="width:70%;" /><br />
-                <div id="fileuploads"></div>
-                <a href="#" onclick="extraTicketAttachment();return false"><img src="images/add.gif" align="absmiddle" border="0" /> {$LANG.addmore}</a><br />
-                ({$LANG.supportticketsallowedextensions}: {$allowedfiletypes})
+		<div class="row form-group">
+			<div class="col-md-12">
+				<label for="message">{$LANG.contactmessage}</label>
+				<textarea name="replymessage" id="message" rows="12" class="form-control">{$replymessage}</textarea>
 			</div>
 		</div>
-
-    </fieldset>
-
-    <p align="center"><input type="submit" value="{$LANG.supportticketsticketsubmit}" class="btn btn-primary" /></p>
-
+		<div id="attachements">
+			<h3>Attachements</h3>
+			<div class="form-group"><input type="file" name="attachments[]"></div>
+		</div>
+		<script type="text/javascript">
+		{literal}
+		function extraAttachment() { $("#attachements").append('<div class="form-group"><input type="file" name="attachments[]"></div>');}
+		{/literal}
+		</script>
+		<a href="#" onclick="extraAttachment();return false;"><img src="images/add.gif" alt="add icon" style="vertical-align:textbottom"> {$LANG.addmore}</a>
+		({$LANG.supportticketsallowedextensions}: {$allowedfiletypes})
+		<div class="form-group text-center">
+			<button class="btn btn-primary" onclick="$('#modalpleasewait').modal();">{$LANG.supportticketsticketsubmit}</button>
+		</div>
+	</div>
 </form>
-</div>
 
-<div class="ticketmsgs">
+<div class="ticketreplys">
 {foreach from=$descreplies key=num item=reply}
-    <div class="{if $reply.admin}admin{else}client{/if}header">
-        <div style="float:right;">{$reply.date}</div>
-        {if $reply.admin}
-            {$reply.name} || {$LANG.supportticketsstaff}
-        {elseif $reply.contactid}
-            {$reply.name} || {$LANG.supportticketscontact}
-        {elseif $reply.userid}
-            {$reply.name} || {$LANG.supportticketsclient}
-        {else}
-            {$reply.name} || {$reply.email}
-        {/if}
-    </div>
-    <div class="{if $reply.admin}admin{else}client{/if}msg">
+	<div class="well well-sm" style="margin-bottom:0">
+		<span class="pull-right">{$reply.date}</span>
+		{$reply.name}
+	{if $reply.admin}
+		<span class="label label-primary">{$LANG.supportticketsstaff}</span>
+	{elseif $reply.contactid}
+		<span class="label label-info">{$LANG.supportticketscontact}</span>
+	{elseif $reply.userid}
+		<span class="label label-info">{$LANG.supportticketsclient}</span>
+	{else}
+		<span class="label label-info">{$reply.email}</span>
+	{/if}
+	</div>
+	<div class="ticketreply clearfix">
+		<p>{$reply.message}</p>
 
-        {$reply.message}
+	{if $reply.attachments}
+		<hr>
+		<h4>{$LANG.supportticketsticketattachments}</h4>
+		<ul class="list-unstyled">
+		{foreach from=$reply.attachments key=num item=attachment}
+			<li>
+				<img src="images/article.gif" style="vertical-align:textbottom" alt="article"> <a href="dl.php?type={if $reply.id}ar&amp;id={$reply.id}{else}a&amp;id={$id}{/if}&amp;i={$num}">{$attachment}</a>
+			</li>
+		{/foreach}
+		</ul>
+	{/if}
 
-        {if $reply.attachments}
-        <div class="attachments">
-            <strong>{$LANG.supportticketsticketattachments}:</strong><br />
-            {foreach from=$reply.attachments key=num item=attachment}
-            &nbsp; <img src="images/article.gif" align="middle" /> <a href="dl.php?type={if $reply.id}ar&id={$reply.id}{else}a&id={$id}{/if}&i={$num}">{$attachment}</a><br />
-            {/foreach}
-        </div>
-        {/if}
-
-        {if $reply.id && $reply.admin && $ratingenabled}
-        {if $reply.rating}
-        <table class="ticketrating" align="right">
-            <tr>
-                <td>{$LANG.ticketreatinggiven}&nbsp;</td>
-                {foreach from=$ratings item=rating}
-                <td background="images/rating_{if $reply.rating>=$rating}pos{else}neg{/if}.png"></td>
-                {/foreach}
-            </tr>
-        </table>
-        {else}
-        <table class="ticketrating" align="right">
-            <tr onmouseout="rating_leave('rate{$reply.id}')">
-                <td>{$LANG.ticketratingquestion}&nbsp;</td>
-                <td class="point" onmouseover="rating_hover('rate{$reply.id}_1')" onclick="rating_select('{$tid}','{$c}','rate{$reply.id}_1')"><strong>{$LANG.ticketratingpoor}&nbsp;</strong></td>
-                {foreach from=$ratings item=rating}
-                <td class="star" id="rate{$reply.id}_{$rating}" onmouseover="rating_hover(this.id)" onclick="rating_select('{$tid}','{$c}',this.id)"></td>
-                {/foreach}
-                <td class="point" onmouseover="rating_hover('rate{$reply.id}_5')" onclick="rating_select('{$tid}','{$c}','rate{$reply.id}_5')"><strong>&nbsp;{$LANG.ticketratingexcellent}</strong></td>
-            </tr>
-        </table>
-{/if}
-<div class="clear"></div>
-{/if}
-
-    </div>
+	{if $reply.id && $reply.admin && $ratingenabled}
+		<div class="pull-right">
+		{if $reply.rating}
+			{$LANG.ticketreatinggiven}
+			<span class="rating">
+			{foreach from=$ratings item=rating}
+				<span{if $reply.rating gte $rating} class="selected"{/if}></span>
+			{/foreach}
+			</span>
+		{else}
+			{$LANG.ticketratingquestion}
+			<span class="rating interactive">
+			{foreach from=$ratings item=rating}
+				<span><a href="viewticket.php?tid={$tid}&amp;c={$c}&amp;rating=rate{$reply.id}_{$rating}" title="{$rating}"></a></span>
+			{/foreach}
+			</span>
+		{/if}
+		</div>
+	{/if}
+	</div>
 {/foreach}
 </div>
 
-<p><input type="button" value="{$LANG.clientareabacklink}" class="btn" onclick="window.location='supporttickets.php'" /> <input type="button" value="{$LANG.supportticketsreply}" class="btn btn-primary" onclick="jQuery('#replycont2').slideToggle()" />{if $showclosebutton} <input type="button" value="{$LANG.supportticketsclose}" class="btn btn-danger" onclick="window.location='{$smarty.server.PHP_SELF}?tid={$tid}&amp;c={$c}&amp;closeticket=true'" />{/if}</p>
-
-<div id="replycont2" class="ticketreplybox">
-<form method="post" action="{$smarty.server.PHP_SELF}?tid={$tid}&amp;c={$c}&amp;postreply=true" enctype="multipart/form-data" class="form-stacked">
-
-	    <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-        		    <label class="control-label bold" for="name">{$LANG.supportticketsclientname}</label>
-        			<div class="controls">
-        			    {if $loggedin}<input class="form-control disabled" type="text" id="name" value="{$clientname}" disabled="disabled" />{else}<input class="form-control" type="text" name="replyname" id="name" value="{$replyname}" />{/if}
-        			</div>
-        		</div>
-        	</div>
-            <div class="col-md-6">
-                <div class="form-group">
-        		    <label class="control-label bold" for="email">{$LANG.supportticketsclientemail}</label>
-        			<div class="controls">
-        			    {if $loggedin}<input class="form-control disabled" type="text" id="email" value="{$email}" disabled="disabled" />{else}<input class="form-control" type="text" name="replyemail" id="email" value="{$replyemail}" />{/if}
-        			</div>
-        		</div>
-        	</div>
-        </div>
-
-	    <div class="form-group">
-		    <label class="control-label bold" for="message">{$LANG.contactmessage}</label>
-			<div class="controls">
-			    <textarea name="replymessage" id="message" rows="12" class="fullwidth">{$replymessage}</textarea>
-			</div>
+<div class="modal fade" id="modalpleasewait">
+	<div class="modal-dialog">
+		<div class="modal-content">
+		   <div class="modal-header text-center">
+		      <h3><img src="images/loadingsml.gif" alt="{$LANG.pleasewait}" style="vertical-align:baseline"> {$LANG.pleasewait}</h3>
+		   </div>
 		</div>
-
-	    <div class="form-group">
-		    <label class="control-label bold" for="attachments">{$LANG.supportticketsticketattachments}:</label>
-			<div class="controls">
-			    <input type="file" name="attachments[]" style="width:70%;" /><br />
-                <div id="fileuploads"></div>
-                <a href="#" onclick="extraTicketAttachment();return false"><img src="images/add.gif" align="absmiddle" border="0" /> {$LANG.addmore}</a><br />
-                ({$LANG.supportticketsallowedextensions}: {$allowedfiletypes})
-			</div>
-		</div>
-
-    <p align="center"><input type="submit" value="{$LANG.supportticketsticketsubmit}" class="btn btn-primary" /></p>
-
-</form>
+	</div>
 </div>
+
+<script type="text/javascript">
+{literal}
+$(function() { 
+	$('.rating.interactive').mouseleave(function() {
+		$(this).children().removeClass('selected');
+	});
+	$('.rating.interactive span').mouseover(function() {
+		$(this).addClass('selected');
+		$(this).prevAll().addClass('selected');
+		$(this).nextAll().removeClass('selected');
+	});
+});
+{/literal}
+</script>
 
 {/if}

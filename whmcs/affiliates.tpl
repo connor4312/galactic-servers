@@ -1,107 +1,138 @@
 {if $inactive}
-{include file="$template/pageheader.tpl" title=$LANG.affiliatestitle}
-<div class="alert alert-warning">
-    <p>{$LANG.affiliatesdisabled}</p>
+<div class="page-header">
+	<h1>{$LANG.affiliatestitle}</h1>
 </div>
-<br />
-<br />
-<br />
-{else}
-{include file="$template/pageheader.tpl" title=$LANG.affiliatestitle desc=$LANG.affiliatesrealtime}
 
-<div class="text-center">
-    <h3>{$LANG.affiliatesreferallink}</h3>
-    <input type="text" value="{$referrallink}" class="bigfield fullwidth text-center" />
+<div class="alert alert-warning">
+	{$LANG.affiliatesdisabled}
+</div>
+{else}
+
+<div class="page-header">
+	<h1>{$LANG.affiliatestitle} <small>{$LANG.affiliatesrealtime}</small></h1>
 </div>
 
 <div class="row">
-<div class="affiliatestatcontainer">
-    <div class="affiliatestatblock">
-        {$LANG.affiliatesvisitorsreferred}<br />
-        <span class="stat">{$visitors}</span>
-    </div>
-    <div class="affiliatestatblock">
-        {$LANG.affiliatessignups}<br />
-        <span class="stat">{$signups}</span>
-    </div>
-    <div class="affiliatestatblock">
-        {$LANG.affiliatesconversionrate}<br />
-        <span class="stat">{$conversionrate}%</span>
-    </div>
-</div>
+	<div class="col-md-10 col-md-offset-1">
+		<div class="text-center">
+			<h3>{$LANG.affiliatesreferallink}</h3>
+			<div class="panel panel-default">
+				<div class="panel-body text-center">
+					<span class="lead">{$referrallink}</span>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 
+<div class="row text-center">
+	<div class="col-md-10 col-md-offset-1">
+		<div class="row">
+			<div class="col-md-4">
+				<div class="well">
+					<h4>{$LANG.affiliatesvisitorsreferred}</h4>
+					<span class="lead">{$visitors}</span>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="well">
+					<h4>{$LANG.affiliatessignups}</h4>
+					<span class="lead">{$signups}</span>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="well">
+					<h4>{$LANG.affiliatesconversionrate}</h4>
+				 	<span class="lead">{$conversionrate}%</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 
-<table class="table table-striped table-framed halfwidthcontainer">
-    <tr>
-      <td class="left">{$LANG.affiliatescommissionspending}:</td>
-      <td><strong>{$pendingcommissions}</strong></td>
-    </tr>
-    <tr>
-      <td class="left">{$LANG.affiliatescommissionsavailable}:</td>
-      <td><strong>{$balance}</strong></td>
-    </tr>
-    <tr>
-      <td class="left">{$LANG.affiliateswithdrawn}:</td>
-      <td><strong>{$withdrawn}</strong></td>
-    </tr>
-</table>
-
-<br />
+<div class="row">
+	<div class="col-md-6 col-md-offset-3">
+		<div class="panel panel-default">
+			<table class="table table-striped">
+				<tbody>
+					<tr>
+						<td>{$LANG.affiliatescommissionspending}</td>
+						<td class="text-center"><strong>{$pendingcommissions}</strong></td>
+					</tr>
+					<tr>
+						<td>{$LANG.affiliatescommissionsavailable}</td>
+						<td class="text-center"><strong>{$balance}</strong></td>
+					</tr>
+					<tr>
+						<td>{$LANG.affiliateswithdrawn}:</td>
+						<td class="text-center"><strong>{$withdrawn}</strong></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
 
 {if $withdrawrequestsent}
-<div class="alert alert-success">
-    <p>{$LANG.affiliateswithdrawalrequestsuccessful}</p>
+<div class="alert alert-success alert-dismissable">
+	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+	{$LANG.affiliateswithdrawalrequestsuccessful}
 </div>
-{else}
-{if $withdrawlevel}
-<p align="center">
-  <input type="button" class="btn btn-large btn-primary" value="{$LANG.affiliatesrequestwithdrawal}" onclick="window.location='{$smarty.server.PHP_SELF}?action=withdrawrequest'" />
-</p>
-{/if}
+{elseif $withdrawlevel}
+<div class="text-center">
+	<a href="{$smarty.server.PHP_SELF}?action=withdrawrequest" class="btn btn-lg btn-primary" title="{$LANG.affiliatesrequestwithdrawal}">{$LANG.affiliatesrequestwithdrawal}</a>
+</div>
 {/if}
 
-{include file="$template/subheader.tpl" title=$LANG.affiliatesreferals}
+<div class="page-header">
+	<h2>{$LANG.affiliatesreferals}</h2>
+</div>
 
 <p>{$numitems} {$LANG.recordsfound}, {$LANG.page} {$pagenumber} {$LANG.pageof} {$totalpages}</p>
 
-<table class="table table-striped table-framed">
-    <thead>
-        <tr>
-            <th{if $orderby eq "date"} class="headerSort{$sort}"{/if}><a href="affiliates.php?orderby=date">{$LANG.affiliatessignupdate}</a></th>
-            <th{if $orderby eq "product"} class="headerSort{$sort}"{/if}><a href="affiliates.php?orderby=product">{$LANG.orderproduct}</a></th>
-            <th{if $orderby eq "amount"} class="headerSort{$sort}"{/if}><a href="affiliates.php?orderby=amount">{$LANG.affiliatesamount}</a></th>
-            <th>{$LANG.affiliatescommission}</th>
-            <th{if $orderby eq "status"} class="headerSort{$sort}"{/if}><a href="affiliates.php?orderby=status">{$LANG.affiliatesstatus}</a></th>
-        </tr>
-    </thead>
-    <tbody>
-  {foreach key=num item=referral from=$referrals}
-  <tr>
-    <td>{$referral.date}</td>
-    <td>{$referral.service}</td>
-    <td>{$referral.amountdesc}</td>
-    <td>{$referral.commission}</td>
-    <td>{$referral.status}</td>
-  </tr>
-{foreachelse}
-        <tr>
-            <td colspan="5">{$LANG.norecordsfound}</td>
-        </tr>
-{/foreach}
-    </tbody>
-</table>
+<div class="panel panel-default">
+	<table class="table table-striped table-sorted">
+		<thead>
+			<tr>
+				<th{if $orderby eq "date"} class="sort-{$sort}"{/if}><a href="affiliates.php?orderby=date">{$LANG.affiliatessignupdate}</a></th>
+				<th{if $orderby eq "product"} class="sort-{$sort}"{/if}><a href="affiliates.php?orderby=product">{$LANG.orderproduct}</a></th>
+				<th{if $orderby eq "amount"} class="sort-{$sort}"{/if}><a href="affiliates.php?orderby=amount">{$LANG.affiliatesamount}</a></th>
+				<th>{$LANG.affiliatescommission}</th>
+				<th{if $orderby eq "status"} class="sort-{$sort}"{/if}><a href="affiliates.php?orderby=status">{$LANG.affiliatesstatus}</a></th>
+			</tr>
+		</thead>
+		<tbody>
+			{foreach key=num item=referral from=$referrals}
+			<tr>
+				<td>{$referral.date}</td>
+				<td>{$referral.service}</td>
+				<td>{$referral.amountdesc}</td>
+				<td>{$referral.commission}</td>
+				<td>{$referral.status}</td>
+			</tr>
+			{foreachelse}
+			<tr>
+				<td colspan="5" class="text-center">{$LANG.norecordsfound}</td>
+			</tr>
+			{/foreach}
+		</tbody>
+	</table>
+</div>
 
-<ul class="pager">
-    <li class="prev{if !$prevpage} disabled{/if}"><a href="{if $prevpage}affiliates.php?page={$prevpage}{else}javascript:return false;{/if}">&larr; {$LANG.previouspage}</a></li>
-    <li class="next{if !$nextpage} disabled{/if}"><a href="{if $nextpage}affiliates.php?page={$nextpage}{else}javascript:return false;{/if}">{$LANG.nextpage} &rarr;</a></li>
+<ul class="pagination">
+	<li{if !$prevpage} class="disabled"{/if}><a href="{if $prevpage}affiliates.php?page={$prevpage}{else}javascript:return false;{/if}">&larr; {$LANG.previouspage}</a></li>
+	<li{if !$nextpage} class="disabled"{/if}><a href="{if $nextpage}affiliates.php?page={$nextpage}{else}javascript:return false;{/if}">{$LANG.nextpage} &rarr;</a></li>
 </ul>
 
 {if $affiliatelinkscode}
-{include file="$template/subheader.tpl" title=$LANG.affiliateslinktous}
+<div class="page-header">
+	<h2>{$LANG.affiliateslinktous}</h2>
+</div>
+
 <div class="text-center">
-    {$affiliatelinkscode}
+	{$affiliatelinkscode}
 </div>
 {/if}
+
 
 {/if}

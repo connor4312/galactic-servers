@@ -1,63 +1,68 @@
-{include file="$template/pageheader.tpl" title=$LANG.sslconfsslcertificate}
+<div class="page-header">
+	<h1>{$LANG.sslconfsslcertificate}</h1>
+</div>
 
 {if $errormessage}
 <div class="alert alert-danger">
-    <p class="bold">{$LANG.clientareaerrors}</p>
-    <ul>
-        {$errormessage}
-    </ul>
+	<h4 class="alert-heading">{$LANG.clientareaerrors}</h4>
+	<ul>
+		{$errormessage}
+	</ul>
 </div>
 {/if}
 
-{include file="$template/subheader.tpl" title=$LANG.sslcertinfo}
-
-<div class="row">
-<div class="col-md-6">
-    <p><h4>{$LANG.sslcerttype}:</h4> {$certtype}</p>
-</div>
-<div class="col-md-6">
-    <p><h4>{$LANG.sslorderdate}:</h4> {$date}</p>
-</div>
-{if $domain}<div class="col-md-6">
-    <p><h4>{$LANG.domainname}:</h4> {$domain}</p>
-</div>{/if}
-<div class="col-md-6">
-    <p><h4>{$LANG.orderprice}:</h4> {$price}</p>
-</div>
-<div class="col-md-6">
-    <p><h4>{$LANG.sslstatus}:</h4> {$status}</p>
-</div>
-{foreach from=$displaydata key=displaydataname item=displaydatavalue}
-<div class="col-md-6">
-    <p><h4>{$displaydataname}:</h4> {$displaydatavalue}</p>
-</div>
-{/foreach}
+<div class="page-header">
+	<h2>{$LANG.sslcertinfo}</h2>
 </div>
 
-<form class="form-horizontal" method="post" action="{$smarty.server.PHP_SELF}?cert={$cert}&step=3">
+<ul class="thumbnails">
+	<li class="col-md-6">
+		<h4>{$LANG.sslcerttype}:</h4>
+		{$certtype}
+	</li>
+	<li class="col-md-6">
+		<h4>{$LANG.sslorderdate}:</h4>
+		{$date}
+	</li>
+	{if $domain}
+	<li class="col-md-6">
+		<h4>{$LANG.domainname}:</h4>
+		{$domain}
+	</li>
+	{/if}
+	<li class="col-md-6">
+		<h4>{$LANG.orderprice}:</h4>
+		{$price}
+	</li>
+	<li class="col-md-6">
+		<h4>{$LANG.sslstatus}:</h4>
+		{$status}
+	</li>
+	{foreach from=$displaydata key=displaydataname item=displaydatavalue}
+	<li class="col-md-6">
+		<h4>{$displaydataname}:</h4>
+		{$displaydatavalue}
+	</li>
+	{/foreach}
+</ul>
 
-{include file="$template/subheader.tpl" title=$LANG.sslcertapproveremail}
+<div class="page-header">
+	<h2>{$LANG.sslcertapproveremail}</h2>
+</div>
 
 <p>{$LANG.sslcertapproveremaildetails}</p>
-<fieldset>
 
-    <div class="form-group">
-	    <label class="full control-label bold" for="servertype">{$LANG.sslcertapproveremail}</label>
+<form class="form-horizontal" method="post" action="{$smarty.server.PHP_SELF}?cert={$cert}&step=3">
+	<div class="control-group">
+		<label class="control-label" for="servertype">{$LANG.sslcertapproveremail}</label>
 		<div class="controls">
-            {foreach from=$approveremails item=approveremail key=num}
-            <div class="col-md-6">
-            <label class="full control-label"><input type="radio" class="radio inline" name="approveremail" value="{$approveremail}"{if $num eq 0} checked{/if} /> <span>{$approveremail}</span></label>
-            </div>
-            {/foreach}
+			{foreach from=$approveremails item=approveremail key=num}
+			<label class="radio"><input type="radio" name="approveremail" value="{$approveremail}"{if $num eq 0} checked="checked"{/if}> {$approveremail}</label>
+			{/foreach}
 		</div>
 	</div>
-
-</fieldset>
-
-<p class="text-center"><input type="submit" value="{$LANG.ordercontinuebutton}" class="btn btn-primary" /></p>
-
+	
+	<div class="form-actions">
+		<input type="submit" value="{$LANG.ordercontinuebutton}" class="btn btn-primary">
+	</div>
 </form>
-
-<br />
-<br />
-<br />

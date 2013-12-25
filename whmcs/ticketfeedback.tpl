@@ -1,167 +1,110 @@
 {if $error}
-
-<p>{$LANG.supportticketinvalid}</p>
-
+<div class="alert alert-danger alert-dismissable">
+	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+	{$LANG.supportticketinvalid}
+</div>
 {elseif $stillopen}
-
-{include file="$template/pageheader.tpl" title=$LANG.ticketfeedbacktitle|cat:' #'|cat:$tid}
-
-<br /><br />
-
-<div class="alert alert-danger text-center">
-    <p><strong>{$LANG.feedbackclosed}</strong></p>
+<div class="page-header">
+	<h1>{$LANG.ticketfeedbacktitle} #{$tid}</h1>
 </div>
 
-<br /><br />
+<div class="alert alert-danger">
+	{$LANG.feedbackclosed}
+</div>
 
-<p class="text-center"><input type="button" value="Return to Client Area" onclick="window.location='clientarea.php'" class="btn" /></p>
-
-<br /><br /><br /><br /><br />
-
+<div class="text-center">
+	<a href="clientarea.php" title="{$LANG.returnclient}" class="btn btn-default">{$LANG.returnclient}</a>
+</div>
 {elseif $feedbackdone}
+<div class="page-header">
+	<h1>{$LANG.ticketfeedbacktitle} #{$tid}</h1>
+</div>
 
-{include file="$template/pageheader.tpl" title=$LANG.ticketfeedbacktitle|cat:' #'|cat:$tid}
-
-<br /><br />
-
-<div class="alert alert-success text-center">
-    <p><strong>{$LANG.feedbackprovided}</strong></p>
+<div class="alert alert-success">
+	{$LANG.feedbackprovided}
 </div>
 
 <p class="text-center">{$LANG.feedbackthankyou}</p>
 
-<br /><br />
-
-<p class="text-center"><input type="button" value="{$LANG.returnclient}" onclick="window.location='clientarea.php'" class="btn" /></p>
-
-<br /><br /><br /><br /><br />
-
+<div class="text-center">
+	<a href="clientarea.php" title="{$LANG.returnclient}" class="btn btn-default">{$LANG.returnclient}</a>
+</div>
 {elseif $success}
-
-{include file="$template/pageheader.tpl" title=$LANG.ticketfeedbacktitle|cat:' #'|cat:$tid}
-
-<br /><br />
-
-<div class="alert alert-success text-center">
-    <p><strong>{$LANG.feedbackreceived}</strong></p>
-    <p>{$LANG.feedbackthankyou}</p>
+<div class="page-header">
+	<h1>{$LANG.ticketfeedbacktitle} #{$tid}</h1>
 </div>
 
-<br /><br />
+<div class="alert alert-success">
+	<h4 class="alert-heading">{$LANG.feedbackreceived}</h4>
+	<p>{$LANG.feedbackthankyou}</p>
+</div>
 
-<p class="text-center"><input type="button" value="{$LANG.returnclient}" onclick="window.location='clientarea.php'" class="btn" /></p>
-
-<br /><br /><br /><br /><br />
-
+<div class="text-center">
+	<a href="clientarea.php" title="{$LANG.returnclient}" class="btn btn-default">{$LANG.returnclient}</a>
+</div>
 {else}
-
-{include file="$template/pageheader.tpl" title=$LANG.ticketfeedbacktitle|cat:' #'|cat:$tid}
+<div class="page-header">
+	<h1>{$LANG.ticketfeedbacktitle} #{$tid}</h1>
+</div>
 
 {if $errormessage}
 <div class="alert alert-danger">
-    <p class="bold">{$LANG.clientareaerrors}</p>
-    <ul>
-        {$errormessage}
-    </ul>
+	<h4 class="alert-heading">{$LANG.clientareaerrors}</h4>
+	<ul>
+		{$errormessage}
+	</ul>
 </div>
 {/if}
 
 <p>{$LANG.feedbackdesc}</p>
 
-<br />
-
-<div class="alert alert-warning">
-    <p class="text-center">[ <a href="viewticket.php?tid={$tid}&c={$c}">{$LANG.feedbackclickreview}</a> ]</p>
+<div class="alert alert-warning text-center">
+	<span class="lead"><a href="viewticket.php?tid={$tid}&c={$c}">{$LANG.feedbackclickreview}</a></span>
 </div>
 
-<table class="table table-framed">
-<tr><td>{$LANG.feedbackopenedat}:</td><td><strong>{$opened}</strong></td></tr>
-<tr><td>{$LANG.feedbacklastreplied}:</td><td><strong>{$lastreply}</strong></td></tr>
-<tr><td>{$LANG.feedbackstaffinvolved}:</td><td><strong>{foreach from=$staffinvolved item=staff}{$staff}, {foreachelse}{$LANG.none}{/foreach}</strong></td></tr>
-<tr><td>{$LANG.feedbacktotalduration}:</td><td><strong>{$duration}</strong></td></tr>
+<table class="table table-bordered">
+	<tr>
+		<th>{$LANG.feedbackopenedat}:</th>
+		<td>{$opened}</td>
+	</tr>
+	<tr>
+		<th>{$LANG.feedbacklastreplied}:</th>
+		<td>{$lastreply}</td>
+	</tr>
+	<tr>
+		<th>{$LANG.feedbackstaffinvolved}:</th>
+		<td>{foreach from=$staffinvolved item=staff name=staff}{$staff}{if !$smarty.foreach.staff.last}, {/if}{foreachelse}{$LANG.none}{/foreach}</td>
+	</tr>
+	<tr>
+		<td>{$LANG.feedbacktotalduration}:</td>
+		<td><strong>{$duration}</strong></td>
+	</tr>
 </table>
 
-<form method="post" action="{$smarty.server.PHP_SELF}?tid={$tid}&c={$c}&feedback=1">
-<input type="hidden" name="validate" value="true" />
-
-{foreach from=$staffinvolved key=staffid item=staff}
-
-<div class="ticketfeedbackstaffcont">
-
-    <p>{$LANG.feedbackpleaserate1} <strong>{$staff}</strong> {$LANG.feedbackhandled}:</p>
-
-    <br />
-
-    <div class="ticketfeedbackrating">
-    <div class="rate" style="color:#efefef;">{$LANG.feedbackworst}</div>
-    <div class="rate">1</div>
-    <div class="rate">2</div>
-    <div class="rate">3</div>
-    <div class="rate">4</div>
-    <div class="rate">5</div>
-    <div class="rate">6</div>
-    <div class="rate">7</div>
-    <div class="rate">8</div>
-    <div class="rate">9</div>
-    <div class="rate">10</div>
-    <div class="rate" style="color:#efefef;">{$LANG.feedbackbest}</div>
-    </div>
-    <div class="clear"></div>
-    <div class="ticketfeedbackrating">
-    <div class="rate">{$LANG.feedbackworst}</div>
-    {foreach from=$ratings item=rating}
-    <div class="rate"><input type="radio" name="rate[{$staffid}]" value="{$rating}"{if $rate.$staffid eq $rating} checked{/if} /></div>
-    {/foreach}
-    <div class="rate">{$LANG.feedbackbest}</div>
-    </div>
-    <div class="clear"></div>
-
-    <br />
-
-    <p>{$LANG.feedbackpleasecomment1} <strong>{$staff}</strong> {$LANG.feedbackhandled}.</p>
-
-    <p class="text-center"><textarea name="comments[{$staffid}]" rows="4" style="width:80%;">{$comments.$staffid}</textarea></p>
-
-</div>
-
+<form method="post" action="{$smarty.server.PHP_SELF}?tid={$tid}&c={$c}&feedback=1" class="form-inline">
+	<input type="hidden" name="validate" value="true">
+	{foreach from=$staffinvolved key=staffid item=staff}
+	<div class="well well-sm">
+		<label>{$LANG.feedbackpleaserate1} <strong>{$staff}</strong> {$LANG.feedbackhandled}:</label>
+		<select name="rate[{$staffid}]">
+		{foreach from=$ratings item=rating}
+			<option value="{$rating}">{$rating}{if $rating eq 1} ({$LANG.feedbackworst}){elseif $rating eq 10} ({$LANG.feedbackbest}){/if}</option>
+		{/foreach}
+		</select>
+		<p>{$LANG.feedbackpleasecomment1} <strong>{$staff}</strong> {$LANG.feedbackhandled}.</p>
+		<textarea name="comments[{$staffid}]" rows="4" class="col-md-11">{$comments.$staffid}</textarea>
+	</div>
+</form>
 {/foreach}
 
-<br />
-
 <p>{$LANG.feedbackimprove}</p>
-
-<p class="text-center"><textarea name="comments[generic]" rows="4" style="width:80%;">{$comments.generic}</textarea></p>
+<textarea name="comments[generic]" rows="4" style="width:80%;">{$comments.generic}</textarea>
 
 <div class="form-actions">
-    <input class="btn btn-primary" type="submit" name="save" value="{$LANG.clientareasavechanges}" />
-    <input class="btn" type="reset" value="{$LANG.cancel}" />
+	<input class="btn btn-primary" type="submit" name="save" value="{$LANG.clientareasavechanges}">
+	<input class="btn btn-default" type="reset" value="{$LANG.cancel}">
 </div>
 
 </form>
-
-{literal}
-<style>
-.ticketfeedbackstaffcont {
-    margin: 10px auto;
-    padding: 15px;
-    width: 90%;
-    background-color: #efefef;
-    -moz-border-radius: 6px;
-    -webkit-border-radius: 6px;
-    -o-border-radius: 6px;
-    border-radius: 6px;
-}
-.ticketfeedbackrating {
-    padding: 0 100px;
-}
-.ticketfeedbackrating .rate {
-    float: left;
-    padding: 0 10px;
-    min-width: 30px;
-    text-align: center;
-}
-
-</style>
-{/literal}
 
 {/if}

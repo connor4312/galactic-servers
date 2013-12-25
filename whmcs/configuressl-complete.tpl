@@ -1,31 +1,30 @@
 {if $errormessage}
 
-{include file="$template/pageheader.tpl" title=$LANG.sslconfsslcertificate}
-
-<div class="alert alert-danger">
-    <p class="bold">{$LANG.clientareaerrors}</p>
-    <ul>
-        {$errormessage}
-    </ul>
+<div class="page-header">
+	<h1>{$LANG.sslconfsslcertificate}</h1>
 </div>
 
-<p><input type="button" value="{$LANG.clientareabacklink}" class="btn" onclick="history.go(-1)" /></p>
+<div class="alert alert-danger">
+	<h4 class="alert-heading">{$LANG.clientareaerrors}</h4>
+	<ul>
+		{$errormessage}
+	</ul>
+</div>
+
+<input type="button" value="{$LANG.clientareabacklink}" class="btn btn-default" onclick="history.go(-1)">
 
 {else}
 
-{include file="$template/pageheader.tpl" title=$LANG.sslconfigcomplete}
+<div class="page-header">
+	<h1>{$LANG.sslconfigcomplete}</h1>
+</div>
 
 <p>{$LANG.sslconfigcompletedetails}</p>
 
-<br />
-
-<form method="post" action="clientarea.php?action=productdetails">
-<input type="hidden" name="id" value="{$serviceid}" />
-<p><input type="submit" value="{$LANG.invoicesbacktoclientarea}" class="btn"/></p>
- </form>
+<form method="post" action="clientarea.php">
+	<input type="hidden" name="action" value="productdetails">
+	<input type="hidden" name="id" value="{$serviceid}">
+	<input type="submit" value="{$LANG.invoicesbacktoclientarea}" class="btn btn-default">
+</form>
 
 {/if}
-
-<br />
-<br />
-<br />
