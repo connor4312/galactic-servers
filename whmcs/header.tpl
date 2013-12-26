@@ -11,6 +11,7 @@
 
 	<link href="//galacticservers.com/css/style.css" media="all" rel="stylesheet" type="text/css" />
 	<link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.min.css" media="all" rel="stylesheet" type="text/css" />
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script type="text/javascript" src="//use.typekit.net/ddx3cat.js"></script>
 	<script type="text/javascript">Typekit.load();</script>
 
