@@ -22,6 +22,7 @@
 	<body>
 
 {$headeroutput}
+<div class="page-wrap">
 	<nav class="main navbar navbar-default"> 
 		<div class="container">
 			<div class="navbar-header">

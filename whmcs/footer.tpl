@@ -2,9 +2,9 @@
 
 {if $pagetitle eq $LANG.carttitle}</div>{/if}
 
-    </div>
+		</div>
+	</div>
 </div>
-
 <footer>
 		<div class="container text-center">
 			<a href="/terms" style="float:left">Terms of Service</a>
