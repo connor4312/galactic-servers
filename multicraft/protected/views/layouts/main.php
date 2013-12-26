@@ -189,10 +189,10 @@
 		</div>
 	</div>
 	<footer>
-		<div class="container">
-			<div class="col-md-4"><a>Terms of Service</a></div>
-			<div class="col-md-4 text-center">Copyright 2013 by GalacticServers</div>
-			<div class="col-md-4 text-right"><a href="http://pyxld.com">Designed</a>. Powered by <a href="http://www.multicraft.org">Multicraft Control Panel</a>.</div>
+		<div class="container text-center">
+			<a href="/terms" style="float:left">Terms of Service</a>
+			Copyright 2013 by GalacticServers
+			<span style="float:right"><a href="http://pyxld.com">Designed. Powered by <a href="http://www.multicraft.org">Multicraft Control Panel</a>.</span>
 		</div>
 	</footer>
 

@@ -6,11 +6,11 @@
 </div>
 
 <footer>
-	<div class="container">
-		<div class="col-md-4"><a>Terms of Service</a></div>
-		<div class="col-md-4 text-center">Copyright 2013 by GalacticServers</div>
-		<div class="col-md-4 text-right"><a href="http://pyxld.com">Designed</a></div>
-	</div>
+		<div class="container text-center">
+			<a href="/terms" style="float:left">Terms of Service</a>
+			Copyright 2013 by GalacticServers
+			<a href="http://pyxld.com" style="float:right">Designed</a>
+		</div>
 </footer>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
