@@ -18,7 +18,7 @@ $(document).ready ->
 	iconBarWidths = ->
 		icons = $('#iconbar .icon')
 		width = $('.container').width() / icons.length
-		icons.css 'width', Math.floor(width) + 'px'
+		icons.show().css 'width', Math.floor(width) + 'px'
 
 	$(window).on 'resize', do ->
 		tickerGo()
