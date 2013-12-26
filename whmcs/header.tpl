@@ -124,7 +124,7 @@
 					{if $condlinks.affiliates}<li><a href="affiliates.php">{$LANG.affiliatestitle}</a></li>{/if}
 				</ul>
 
-					<ul class="nav navbar-nav navbar-right">
+				<ul class="nav navbar-nav navbar-right">
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">{$LANG.hello}, {$loggedinuser.firstname}!&nbsp;<b class="caret"></b></a>
 						<ul class="dropdown-menu">
@@ -147,21 +147,18 @@
 					<li><a href="contact.php">{$LANG.contactus}</a></li>
 				</ul>
 
-					<ul class="nav navbar-nav navbar-right">
-						<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">{$LANG.account}&nbsp;<b class="caret"></b></a>
-							<ul class="dropdown-menu">
-								<li><a href="clientarea.php">{$LANG.login}</a></li>
-								<li><a href="register.php">{$LANG.register}</a></li>
-								<li class="divider"></li>
-								<li><a href="pwreset.php">{$LANG.forgotpw}</a></li>
-							</ul>
-						</li>
-					</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">{$LANG.account}&nbsp;<b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="clientarea.php">{$LANG.login}</a></li>
+							<li><a href="register.php">{$LANG.register}</a></li>
+							<li class="divider"></li>
+							<li><a href="pwreset.php">{$LANG.forgotpw}</a></li>
+						</ul>
+					</li>
+				</ul>
 		{/if}
-
-				</div>
-			</div>
-			</div>
+			</nav>
 		</div>
 	</div>
 	<div class="container">
