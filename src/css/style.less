@@ -307,9 +307,9 @@ footer {
 	overflow: hidden;
 	background: #fff;
 	box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
-	display: block;
+	display: inline-block;
 	color: #000;
-	max-width:300px
+	max-width:300px;
 	margin: 0 auto 20px;
 	.transition(0.1s);
 
@@ -368,5 +368,69 @@ footer {
 			.transition(0.5s);
 		}
 
+	}
+}
+
+.bannerbtn {
+	font-size: 1.5em;
+	line-height: 3em;
+	text-align: center;
+	font-weight: 200;
+	margin: 2em 1em;
+	box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+
+	div {
+		background: #fff;
+	}
+
+	a {
+		display: block;
+		background: #161616;
+		text-transform: uppercase;
+		color: #777;
+		.transition(0.2s);
+
+		&:hover {
+			color: #fff;
+			text-decoration: none;
+			background: @brand-primary;
+			.transition(0.4s);
+		}
+	}
+}
+
+.btntable {
+	border-spacing: 20px;
+	border-collapse: separate;
+
+	a {
+		display: block;
+		margin: 20px -20px -20px;
+		background: @brand-primary;
+		color: #fff;
+		line-height: 3em;
+		.transition(0.2s);
+
+		&:hover {
+			background: #161616;
+			.transition(0.4s);
+			text-decoration: none;
+		}
+	}
+
+	td {
+		margin: 10px;
+		border-spacing: 20px;
+		border: aliceblue;
+		border-collapse: separate;
+		background: #fff;
+		padding: 20px;
+		text-align: center;
+		font-size: 1.2em;
+		color: #666;
+		width: 50%;
+		border-radius: 5px;
+		overflow: hidden;
+		box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
 	}
 }
