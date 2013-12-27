@@ -13,17 +13,53 @@
 			</div>
 		</div>
 		<div class="container">
-			{{#plans}}
-				<div class="col-md-3">
-					<a class="plan">
-						<div class="thumb" style="background-image:url('img/plan/{{name}}.jpg')">
-							{{name}}
-						</div>
-						<span>{{size}}</span>
-						<b>${{price}}</b>
-					</a>
+			<div class="row">
+				<div class="col-md-4 featbox">
+					<i class="fa fa-flag"></i>
+					<h3>Hosting Without Limits</h3>
+					<p>We don’t restrict files access so you have the freedom to do what you want.</p>
 				</div>
-			{{/plans}}
+				<div class="col-md-4 featbox">
+					<i class="fa fa-puzzle-piece"></i>
+					<h3>Play How You Want</h3>
+					<p>Upload unlimited jars allowing you freedom to choose how you play.</p>
+				</div>
+				<div class="col-md-4 featbox">
+					<i class="fa fa-info"></i>
+					<h3>Great Support</h3>
+					<p>Dedicated support to get you started and stay online.</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4 featbox">
+					<i class="fa fa-clock-o"></i>
+					<h3>Don't Wait</h3>
+					<p>Instant set up on custom Multicraft panel and unlimited players.</p>
+				</div>
+				<div class="col-md-4 featbox">
+					<i class="fa fa-flash"></i>
+					<h3>Speed of Light</h3>
+					<p>We run on the latest E3 processors bring power to your server.</p>
+				</div>
+				<div class="col-md-4 featbox">
+					<i class="fa fa-hdd-o"></i>
+					<h3>Solid Service</h3>
+					<p>All of our services come with state-of-the-art SDD Drives as standard.</p>
+				</div>
+			</div>
+			<div class="row">
+				{{#plans}}
+					<div class="col-md-3">
+						<a class="plan">
+							<div class="thumb" style="background-image:url('img/plan/{{name}}.jpg')">
+								{{name}}
+							</div>
+							<span>{{size}}</span>
+							<b>${{price}}</b>
+						</a>
+					</div>
+				{{/plans}}
+			</div>
 		</div>
 	</div>
 	{{> footer }}
