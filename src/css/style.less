@@ -37,6 +37,7 @@ html, body {
 }
 .page-wrap {
 	min-height: 100%;
+	padding-bottom: 30px;
 	margin-bottom: -100px; 
 
 	&:after {
@@ -307,7 +308,7 @@ footer {
 	overflow: hidden;
 	background: #fff;
 	box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
-	display: inline-block;
+	display: block;
 	color: #000;
 	max-width:300px;
 	margin: 0 auto 20px;
@@ -432,5 +433,55 @@ footer {
 		border-radius: 5px;
 		overflow: hidden;
 		box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+	}
+}
+
+.uparrowbar {
+	@height: 2em;
+
+	position: relative;
+	height: 20px;
+	border-top: 1px solid @brand-primary;
+	display: block;
+	margin: @height 0;
+
+	&:hover {
+		&, &:after {
+			border-color: #161616;
+			.transition(1s);
+		}
+	}
+
+	&:after {
+		position: absolute;
+		left: 50%;
+		margin: -0.5 * @height;
+		width: @height;
+		height: @height;
+		.rotate(45deg);
+		border-left: 1px solid @brand-primary;
+		border-top: 1px solid @brand-primary;
+		background: @body-bg;
+		content: "";
+	}
+}
+
+#faq {
+	ol a {
+		color: #666;
+		line-height: 1.5em;
+		display: block;
+		padding: 0.5em 0;
+		font-size: 1.1em;
+	}
+
+	.title {
+		font-size: 3em;
+		font-weight: 200;
+		vertical-align: top;
+	}
+
+	.question {
+		font-size: 1.3em;
 	}
 }

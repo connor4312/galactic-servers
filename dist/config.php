@@ -16,5 +16,23 @@ return array(
 		array('name' => '???', 'size' => '5GB', 'price' => '39.99'),
 		array('name' => 'Supernova', 'size' => '5.5GB', 'price' => '44.99'),
 		array('name' => 'Galactic', 'size' => '6.0GB', 'price' => '47.99')
+	),
+	'faq' => array(
+		array(
+			'q' => 'Lorem ipsum dolor sit amert consectur?',
+			'a' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut fermentum velit. Fusce dignissim tortor vel nunc ullamcorper lacinia. Cras posuere tellus ut eros mollis, sed mollis massa ultrices. Cras elementum bibendum nisi et viverra. Praesent consequat imperdiet vulputate.',
+		),
+		array(
+			'q' => 'Lorem ipsum dolor sit amert consectur?',
+			'a' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut fermentum velit. Fusce dignissim tortor vel nunc ullamcorper lacinia. Cras posuere tellus ut eros mollis, sed mollis massa ultrices. Cras elementum bibendum nisi et viverra. Praesent consequat imperdiet vulputate.',
+		),
+		array(
+			'q' => 'Lorem ipsum dolor sit amert consectur?',
+			'a' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut fermentum velit. Fusce dignissim tortor vel nunc ullamcorper lacinia. Cras posuere tellus ut eros mollis, sed mollis massa ultrices. Cras elementum bibendum nisi et viverra. Praesent consequat imperdiet vulputate.',
+		),
+		array(
+			'q' => 'Lorem ipsum dolor sit amert consectur?',
+			'a' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut fermentum velit. Fusce dignissim tortor vel nunc ullamcorper lacinia. Cras posuere tellus ut eros mollis, sed mollis massa ultrices. Cras elementum bibendum nisi et viverra. Praesent consequat imperdiet vulputate.',
+		),
 	)
 );
