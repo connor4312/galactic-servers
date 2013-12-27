@@ -22,6 +22,14 @@ $(document).ready ->
 			width: Math.floor(width) + 'px'
 			display: 'inline-block'
 
+	$('a[href^="#"]').on 'click', (e) ->
+		$target = $($(@).attr('href'))
+		$('html, body').animate { scrollTop: $target.offset().top }
+
+
+		e.preventDefault()
+		return false
+
 	$(window).on 'resize', do ->
 		tickerGo()
 		iconBarWidths()
