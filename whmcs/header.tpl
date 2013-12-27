@@ -37,7 +37,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">Galactic Servers</a>
+				<a class="navbar-brand" href="//galacticservers.com">Galactic Servers</a>
 			</div>
 			<div class="collapse navbar-collapse" id="js-navcollapse">
 				<div class="navbar-form navbar-right"><a class="btn btn-primary">Buy Now</a></div>
