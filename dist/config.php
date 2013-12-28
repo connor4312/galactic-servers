@@ -19,18 +19,22 @@ return array(
 	),
 	'faq' => array(
 		array(
+			'slug' => 'lorem-ipsum1',
 			'q' => 'Lorem ipsum dolor sit amert consectur?',
 			'a' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut fermentum velit. Fusce dignissim tortor vel nunc ullamcorper lacinia. Cras posuere tellus ut eros mollis, sed mollis massa ultrices. Cras elementum bibendum nisi et viverra. Praesent consequat imperdiet vulputate.',
 		),
 		array(
+			'slug' => 'lorem-ipsum2',
 			'q' => 'Lorem ipsum dolor sit amert consectur?',
 			'a' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut fermentum velit. Fusce dignissim tortor vel nunc ullamcorper lacinia. Cras posuere tellus ut eros mollis, sed mollis massa ultrices. Cras elementum bibendum nisi et viverra. Praesent consequat imperdiet vulputate.',
 		),
 		array(
+			'slug' => 'lorem-ipsum3',
 			'q' => 'Lorem ipsum dolor sit amert consectur?',
 			'a' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut fermentum velit. Fusce dignissim tortor vel nunc ullamcorper lacinia. Cras posuere tellus ut eros mollis, sed mollis massa ultrices. Cras elementum bibendum nisi et viverra. Praesent consequat imperdiet vulputate.',
 		),
 		array(
+			'slug' => 'lorem-ipsum4',
 			'q' => 'Lorem ipsum dolor sit amert consectur?',
 			'a' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut fermentum velit. Fusce dignissim tortor vel nunc ullamcorper lacinia. Cras posuere tellus ut eros mollis, sed mollis massa ultrices. Cras elementum bibendum nisi et viverra. Praesent consequat imperdiet vulputate.',
 		),

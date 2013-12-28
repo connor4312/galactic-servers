@@ -1,7 +1,7 @@
 $(document).ready ->
 	tickerGo = ->
 		$('.ticker').each ->
-			eh  = $('> *:first-child', this).height()
+			eh	= $('> *:first-child', this).height()
 			num = $(this).children().length
 			i = 1
 
@@ -22,13 +22,18 @@ $(document).ready ->
 			width: Math.floor(width) + 'px'
 			display: 'inline-block'
 
-	$('a[href^="#"]').on 'click', (e) ->
-		$target = $($(@).attr('href'))
-		$('html, body').animate { scrollTop: $target.offset().top }
+	$("a[href*=#]:not([href=#])").click (e)->
+		if location.pathname.replace(/^\//, "") is @pathname.replace(/^\//, "") and location.hostname is @hostname
+			target = $(@hash)
+			target = (if target.length then target else $("[name=" + @hash.slice(1) + "]"))
+			if target.length
+				$("html,body").animate
+					scrollTop: target.offset().top
+				, 1000, 'swing', => window.location.hash = @hash
 
+			e.preventDefault()
+			return false
 
-		e.preventDefault()
-		return false
 
 	$(window).on 'resize', do ->
 		tickerGo()

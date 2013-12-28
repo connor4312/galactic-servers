@@ -15,10 +15,11 @@
 
 		<div class="container" id="faq">
 			<ol>
-				{{#faq}}<li><a href="#{{key}}">{{q}}</a></li>{{/faq}}
+				{{#faq}}<li><a href="#{{slug}}">{{q}}</a></li>{{/faq}}
 			</ol>
 			{{#faq}}
 			<a href="#slider" class="uparrowbar"></a>
+			<a name="{{slug}}"></a>
 			<table>
 				<tr>
 					<td class="title">Q:</td>
