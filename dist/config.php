@@ -13,9 +13,9 @@ return array(
 		array('name' => 'Lunar', 'size' => '3.5GB', 'price' => '27.99'),
 		array('name' => 'Nebula', 'size' => '4.0GB', 'price' => '31.99'),
 		array('name' => 'Nova', 'size' => '4.5GB', 'price' => '34.99'),
-		array('name' => '???', 'size' => '5GB', 'price' => '39.99'),
-		array('name' => 'Supernova', 'size' => '5.5GB', 'price' => '44.99'),
-		array('name' => 'Galactic', 'size' => '6.0GB', 'price' => '47.99')
+		array('name' => 'Supernova', 'size' => '5.0GB', 'price' => '39.99'),
+		array('name' => 'Galactic', 'size' => '5.5GB', 'price' => '44.99'),
+		array('name' => 'Universal', 'size' => '6.0GB', 'price' => '47.99')
 	),
 	'faq' => array(
 		array(
