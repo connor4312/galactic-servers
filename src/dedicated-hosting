@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+	{{> head }}
+	<title>Galactic Servers</title>
+</head>
+<body>
+	<div class="page-wrap">
+		{{> navigation }}
+		<div id="slider">
+			<div class="container">
+				<h1>Dedicated Hosting</h1>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4 featbox">
+					<i class="fa fa-repeat"></i>
+					<h3>Automatic Backups</h3>
+					<p>We offer the use of scripts and we can install you own back up scripts.</p>
+				</div>
+				<div class="col-md-4 featbox">
+					<i class="fa fa-globe"></i>
+					<h3>99.9% Uptime</h3>
+					<p>Our DDOS protection and fast ports with professional hardware ensure your server stays up.</p>
+				</div>
+				<div class="col-md-4 featbox">
+					<i class="fa fa-clock-o"></i>
+					<h3>Billing Cycle</h3>
+					<p>your billing only begins once your server is activated so you don't waste money waiting for server.</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4 featbox">
+					<i class="fa fa-check-square-o"></i>
+					<h3>Dedicated Support</h3>
+					<p>We offer managed support on all of our servers to ensure that you can get help on anything you need.</p>
+				</div>
+				<div class="col-md-4 featbox">
+					<i class="fa fa-dashboard"></i>
+					<h3>Your choice</h3>
+					<p>You choose how to run your server, we offer installation of many control panels.</p>
+				</div>
+				<div class="col-md-4 featbox">
+					<i class="fa fa-flash"></i>
+					<h3>Premium hardware</h3>
+					<p>Along with offering the latest and very best hardware for affordable pricing we complete customsation.</p>
+				</div>
+			</div>
+		
+			<div>
+				<!--Hopefully this will be made into just displaying the cart rather then an iframe and coded into this page. for now this page is a place holder.-->
+				<iframe src="https://my.galacticservers.com/cart.php?a=add&pid=68" seamless></iframe>
+			</div>
+		</div>
+	</div>
+	{{> footer }}
+</body>
+</html>
