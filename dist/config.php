@@ -17,6 +17,38 @@ return array(
 		array('name' => 'Galactic', 'size' => '5.5GB', 'price' => '44.99'),
 		array('name' => 'Universal', 'size' => '6.0GB', 'price' => '47.99')
 	),
+	'dedicated' => array(
+		array(
+			'name' => 'Dual L5420 2.5GHz',
+			'features' => array(
+				array('feature' => '16GB RAM'),
+				array('feature' => 'Up To 1TB HDD'),
+				array('feature' => '1000GB Transfer'),
+				array('feature' => '100 Mbps'),
+			),
+			'price' => '$75.00'
+		),
+		array(
+			'name' => 'Dual L5420 2.5GHz ',
+			'features' => array(
+				array('feature' => 'Up to 32GB RAM'),
+				array('feature' => 'Up To 1TB HDD'),
+				array('feature' => '1000GB Transfer'),
+				array('feature' => '100 Mbps'),
+			),
+			'price' => '$105.00'
+		),
+		array(
+			'name' => 'E3 1270 v3 3.5GHz',
+			'features' => array(
+				array('feature' => 'Up to 32GB RAM'),
+				array('feature' => 'Up To 1TB HDD'),
+				array('feature' => '1000GB Transfer'),
+				array('feature' => '100 Mbps'),
+			),
+			'price' => '$135.00'
+		),
+	),
 	'faq' => array(
 		array(
 			'slug' => 'lorem-ipsum1',

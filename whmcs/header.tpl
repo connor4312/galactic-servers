@@ -46,8 +46,8 @@
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Pricing <b class="caret"></b></a>
 						<ul class="dropdown-menu">
-							<li><a href="//my.galacticservers.com/cart.php?gid=1">Minecraft Hosting</a></li>
-							<li><a href="//my.galacticservers.com/cart.php?gid=4">Dedicated Servers</a></li>
+							<li><a href="//galacticservers.com/minecraft-hosting">Minecraft Hosting</a></li>
+							<li><a href="//galacticservers.com/dedicated-servers">Dedicated Servers</a></li>
 							<li><a href="//my.galacticservers.com/cart.php?gid=2">Web Hosting</a></li>
 							<li><a href="#">Web Design</a></li>
 						</ul>
