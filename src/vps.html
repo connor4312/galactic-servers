@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
 	{{> head }}
-	<title>Galactic Servers - Web Hosting</title>
+	<title>Galactic Servers - VPS</title>
 </head>
 <body>
 	<div class="page-wrap">
 		{{> navigation }}
 		<div id="slider">
 			<div class="container">
-				<h1>Web Hosting</h1>
+				<h1>VPS</h1>
 			</div>
 		</div>
 		<div class="container">
@@ -33,17 +33,17 @@
 			<br>
 			<div class="row text-center">
 				<table class="plan-table">
-					{{#web}}
+					{{#vps}}
 					<tr class="{{ style }}">
 						<th>{{ name }}</th>
 					{{#features}}
 						<td>{{ feature }}</td>
 					{{/features}}
 						<td>
-							<a href="http://my.galacticservers.com/cart.php?gid=3" class="btn btn-primary btn-block btn-lg">Order Now for {{price}}</a>
+							<a href="http://my.galacticservers.com/cart.php" class="btn btn-primary btn-block btn-lg">Order Now for {{price}}</a>
 						</td>
 					</tr>
-					{{/web}}
+					{{/vps}}
 				</table>
 			</div>
 
@@ -67,8 +67,8 @@
 			</div>
 
 			<div class="row bannerbtn">
-				<div class="col-md-6">Need something <i>more flexible?</i></div>
-				<a href="//galacticservers.com/vps" class="col-md-6">Check out our VPS's</a>
+				<div class="col-md-6">Need something <i>bigger?</i></div>
+				<a href="//galacticservers.com/dedicated-servers" class="col-md-6">Check out our Dedicated Servers</a>
 			</div>
 		</div>
 	</div>

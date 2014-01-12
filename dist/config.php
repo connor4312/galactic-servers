@@ -97,6 +97,21 @@ return array(
 			'link' => 'http://my.galacticservers.com/cart.php?a=add&pid=51'
 		),
 	),
+	'vps' => array(
+		array(
+			'name' => 'Basic',
+			'features' => array(
+				array('feature' => '128MB RAM / 64MB VSwap'),
+				array('feature' => 'OpenVZ'),
+				array('feature' => '5GB Storage'),
+				array('feature' => '1TB Bandwidth'),
+				array('feature' => 'RAID10 SSD'),
+			),
+			'price' => '$1.95',
+			'style' => 'border',
+			'link' => 'http://my.galacticservers.com/cart.php?a=add&pid=19'
+		),
+	),
 	'faq' => array(
 		array(
 			'slug' => 'lorem-ipsum1',
