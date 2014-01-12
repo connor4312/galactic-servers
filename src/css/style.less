@@ -313,6 +313,13 @@ footer {
 	margin: 0 auto 20px;
 	.transition(0.1s);
 
+	&.sponsor {
+		.thumb {
+			line-height: 200px;
+		}
+		max-width: none;
+	}
+
 	.thumb {
 		text-align: center;
 		line-height: 100px;
@@ -335,10 +342,11 @@ footer {
 			.transition(0.1s);
 		}
 	}
+
 	span {
 		display: block;
 		background: #fff;
-		max-width: 100px;
+		max-width: 50%;
 		text-align: center;
 		margin: -1em auto 0;
 		line-height: 2em;
@@ -346,11 +354,22 @@ footer {
 		border-radius: 3px;
 		position: relative;
 	}
-	b {
+
+	b, p {
 		text-align: center;
 		display: block;
+		padding: 0 1em;
+		margin: 0;
+	}
+
+	b {
 		font-size: 2em;
 		line-height: 2em;
+	}
+
+	p {
+		font-size: 1.2em;
+		line-height: 1.3em;
 	}
 
 	&:hover {
