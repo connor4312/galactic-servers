@@ -1,3 +1,7 @@
+`window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set._.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute('charset','utf-8');$.src='//v2.zopim.com/?1oo1bIxEgCw8dmVvKh3hJrir8EPWEgMm';z.t=+new Date;$.type='text/javascript';e.parentNode.insertBefore($,e)})(document,'script')`
+
+`(function(w,t,gk,d,s,fs){if(w[gk])return;d=w.document;w[gk]=function(){(w[gk]._=w[gk]._||[]).push(arguments)};s=d.createElement(t);s.async=!0;s.src='//static.getkudos.me/widget.js';fs=d.getElementsByTagName(t)[0];fs.parentNode.insertBefore(s,fs)})(window,'script','getkudos');getkudos('create', 'GalacticServers')`
+
 $(document).ready ->
 	tickerGo = ->
 		$('.ticker').each ->
