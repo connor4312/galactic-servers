@@ -60,7 +60,8 @@ return array(
 				array('feature' => '5 Subdomains'),
 			),
 			'price' => '$2.94',
-			'style' => 'border'
+			'style' => 'border',
+			'link' => 'http://my.galacticservers.com/cart.php?a=add&pid=19'
 		),
 		array(
 			'name' => 'Bronze',
@@ -70,7 +71,8 @@ return array(
 				array('feature' => '20 Databases'),
 				array('feature' => '10 Subdomains'),
 			),
-			'price' => '$4.94'
+			'price' => '$4.94',
+			'link' => 'http://my.galacticservers.com/cart.php?a=add&pid=20'
 		),
 		array(
 			'name' => 'Silver',
@@ -80,7 +82,8 @@ return array(
 				array('feature' => '100 Databases'),
 				array('feature' => '100 Subdomains'),
 			),
-			'price' => '$6.94'
+			'price' => '$6.94',
+			'link' => 'http://my.galacticservers.com/cart.php?a=add&pid=21'
 		),
 		array(
 			'name' => 'Gold',
@@ -90,7 +93,8 @@ return array(
 				array('feature' => 'Unlimited Databases'),
 				array('feature' => 'Unlimited Subdomains'),
 			),
-			'price' => '$14.99'
+			'price' => '$14.99',
+			'link' => 'http://my.galacticservers.com/cart.php?a=add&pid=51'
 		),
 	),
 	'faq' => array(
