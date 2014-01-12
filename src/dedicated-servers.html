@@ -30,11 +30,11 @@
 					<p>Our dedicated team provides around the clock support on all of our managed services to ensure your machines stay up and running successfully. Through email, Skype support and ticket submission there has never been an easier way to get in contact with a support team you can trust.</p>
 				</div>
 			</div>
-
+			<br>
 			<div class="row text-center">
 				<table class="plan-table">
 					{{#dedicated}}
-					<tr>
+					<tr class="{{ style }}">
 						<th>{{ name }}</th>
 					{{#features}}
 						<td>{{ feature }}</td>
@@ -45,6 +45,11 @@
 					</tr>
 					{{/dedicated}}
 				</table>
+			</div>
+
+			<div class="row bannerbtn">
+				<div class="col-md-6">Need something <i>more flexible?</i></div>
+				<a href="//galacticservers.com/vps" class="col-md-6">Check out our VPS's</a>
 			</div>
 		</div>
 	</div>

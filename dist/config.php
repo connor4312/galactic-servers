@@ -26,7 +26,8 @@ return array(
 				array('feature' => '1000GB Transfer'),
 				array('feature' => '100 Mbps'),
 			),
-			'price' => '$75.00'
+			'price' => '$75.00',
+			'style' => 'border'
 		),
 		array(
 			'name' => 'Dual L5420 2.5GHz ',

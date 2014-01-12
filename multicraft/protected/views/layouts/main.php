@@ -72,7 +72,7 @@
 								<li><a href="//galacticservers.com/minecraft-hosting">Minecraft Hosting</a></li>
 								<li><a href="//galacticservers.com/dedicated-servers">Dedicated Servers</a></li>
 								<li><a href="//my.galacticservers.com/cart.php?gid=2">Web Hosting</a></li>
-								<li><a href="#">Web Design</a></li>
+								<li><a href="//galacticservers.com/VPS">VPS</a></li>
 							</ul>
 						</li>
 						<li class="dropdown">
