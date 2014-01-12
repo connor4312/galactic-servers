@@ -50,6 +50,49 @@ return array(
 			'price' => '$135.00'
 		),
 	),
+	'web' => array(
+		array(
+			'name' => 'Basic',
+			'features' => array(
+				array('feature' => '5000MB Bandwidth'),
+				array('feature' => '10 Emails'),
+				array('feature' => '10 Databases'),
+				array('feature' => '5 Subdomains'),
+			),
+			'price' => '$2.94',
+			'style' => 'border'
+		),
+		array(
+			'name' => 'Bronze',
+			'features' => array(
+				array('feature' => '5000MB Bandwidth'),
+				array('feature' => '20 Emails'),
+				array('feature' => '20 Databases'),
+				array('feature' => '10 Subdomains'),
+			),
+			'price' => '$4.94'
+		),
+		array(
+			'name' => 'Silver',
+			'features' => array(
+				array('feature' => '25000MB Bandwidth'),
+				array('feature' => '100 Emails'),
+				array('feature' => '100 Databases'),
+				array('feature' => '100 Subdomains'),
+			),
+			'price' => '$6.94'
+		),
+		array(
+			'name' => 'Gold',
+			'features' => array(
+				array('feature' => '50000MB Bandwidth'),
+				array('feature' => 'Unlimited Emails'),
+				array('feature' => 'Unlimited Databases'),
+				array('feature' => 'Unlimited Subdomains'),
+			),
+			'price' => '$14.99'
+		),
+	),
 	'faq' => array(
 		array(
 			'slug' => 'lorem-ipsum1',
