@@ -370,6 +370,7 @@ footer {
 	p {
 		font-size: 1.2em;
 		line-height: 1.3em;
+		padding: 1em;
 	}
 
 	&:hover {
@@ -551,4 +552,32 @@ p.focused {
 	.border th {
 		border-bottom: 1px solid #ddd;
 	}
+}
+.profile {
+	background: #fff;
+	margin: 20px;
+	padding: 10px 10px 10px 0;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	h3 {
+		margin: 0;
+	}
+	img {
+		float: left;
+		margin: -10px 10px -10px 9px;
+	}
+	p {
+		margin: 0;
+	}
+
+	&:after {
+		clear: left;
+		content: "";
+		display: block;
+	}
+}
+
+.focus {
+	font-size: 1.2em;
+	text-align: center;
+	margin: 20px;
 }

@@ -56,7 +56,6 @@
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">About <b class="caret"></b></a>
 						<ul class="dropdown-menu">
-							<li><a href="//galacticservers.com/why-galactic">Why Galactic?</a></li>
 							<li><a href="//galacticservers.com/our-team">Our Team</a></li>
 							<li><a href="//galacticservers.com/affiliation">Affiliation</a></li>
 							<li><a href="//galacticservers.com/faq">FAQ</a></li>
