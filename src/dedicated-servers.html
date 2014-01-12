@@ -32,25 +32,19 @@
 			</div>
 
 			<div class="row text-center">
-				{{#dedicated}}
-				<div class="col-md-4">
-					<table class="plan-table">
-						<tr>
-							<th>{{ name }}</th>
-						</tr>
-						{{#features}}
-						<tr>
-							<td>{{ feature }}</td>
-						</tr>
-						{{/features}}
-						<tr>
-							<td>
-								<a href="http://my.galacticservers.com/cart.php?a=confproduct&i=0" class="btn btn-primary btn-block btn-lg">Order Now</a>
-							</td>
-						</tr>
-					</table>
-				</div>
-				{{/dedicated}}
+				<table class="plan-table">
+					{{#dedicated}}
+					<tr>
+						<th>{{ name }}</th>
+					{{#features}}
+						<td>{{ feature }}</td>
+					{{/features}}
+						<td>
+							<a href="http://my.galacticservers.com/cart.php?a=confproduct&i=0" class="btn btn-primary btn-block btn-lg">Order Now</a>
+						</td>
+					</tr>
+					{{/dedicated}}
+				</table>
 			</div>
 		</div>
 	</div>
