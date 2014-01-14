@@ -114,24 +114,25 @@ return array(
 	),
 	'faq' => array(
 		array(
-			'slug' => 'lorem-ipsum1',
-			'q' => 'Lorem ipsum dolor sit amert consectur?',
-			'a' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut fermentum velit. Fusce dignissim tortor vel nunc ullamcorper lacinia. Cras posuere tellus ut eros mollis, sed mollis massa ultrices. Cras elementum bibendum nisi et viverra. Praesent consequat imperdiet vulputate.',
+			'slug' => 'who-are-you',
+			'q' => 'Who are you?',
+			'a' => 'Galactic Servers is a fully registered Ltd firm which was set up to break into the hosting market for affordable hosting with quality services. With a growing group of dedicated staff our team is determined to help bring the best support available with affordable pricing to everyone.<br>
+				Whilst setting up and continuing to explain, Galactic Servers will continue to provide a quality services to its loyal member with the community in mind. Providing hosting solutions is our main service but we also accompanying for many other services which you can find through our site.',
 		),
 		array(
-			'slug' => 'lorem-ipsum2',
-			'q' => 'Lorem ipsum dolor sit amert consectur?',
-			'a' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut fermentum velit. Fusce dignissim tortor vel nunc ullamcorper lacinia. Cras posuere tellus ut eros mollis, sed mollis massa ultrices. Cras elementum bibendum nisi et viverra. Praesent consequat imperdiet vulputate.',
+			'slug' => 'mission',
+			'q' => 'What is your mission goal?',
+			'a' => 'We are a dedicated hosting company directed and motivated to providing our clients with the best possible services without restrictions for the lowest price possible. We don\'t believe in hidden costs or charge premium for services. Our mission goal is to provide the world with affordable hosting.',
 		),
 		array(
-			'slug' => 'lorem-ipsum3',
-			'q' => 'Lorem ipsum dolor sit amert consectur?',
-			'a' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut fermentum velit. Fusce dignissim tortor vel nunc ullamcorper lacinia. Cras posuere tellus ut eros mollis, sed mollis massa ultrices. Cras elementum bibendum nisi et viverra. Praesent consequat imperdiet vulputate.',
+			'slug' => 'share-galactic',
+			'q' => 'Can I tell my friends about you?',
+			'a' => 'Sure, we have <a href="/testimonies">testimonies page</a> where all recommendation are place so you could get your own tweet on our site, but feel more then welcome to tell anyone about us. In fact if you are an existing member you can get 10% of what your friend pays by signing up to our <a href="affiliation.html">Affiliation program</a> and giving them the referral link.',
 		),
 		array(
-			'slug' => 'lorem-ipsum4',
-			'q' => 'Lorem ipsum dolor sit amert consectur?',
-			'a' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut fermentum velit. Fusce dignissim tortor vel nunc ullamcorper lacinia. Cras posuere tellus ut eros mollis, sed mollis massa ultrices. Cras elementum bibendum nisi et viverra. Praesent consequat imperdiet vulputate.',
+			'slug' => 'logos',
+			'q' => 'Do you have any logos I can use?',
+			'a' => 'Of course, simply <a href="https://galacticservers.com/clients/logos/">click here</a> to view our media display.',
 		),
 	)
 );
